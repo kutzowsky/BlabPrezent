@@ -5,6 +5,7 @@ import logging
 
 from sleekxmpp import ClientXMPP
 
+from MessageHandler import MessageHandler
 import TestingCredentials
 
 
@@ -12,17 +13,17 @@ class Bot(ClientXMPP):
     def __init__(self, jid, password):
         ClientXMPP.__init__(self, jid, password)
 
-        self.add_event_handler("session_start", self.session_start)
-        self.add_event_handler("message", self.message)
+        self.add_event_handler("session_start", self.on_session_start)
+        self.add_event_handler("message", self.on_message)
 
-    def session_start(self, event):
+    def on_session_start(self, _):
         self.send_presence()
 
     @staticmethod
-    def message(msg):
-        if msg['type'] in ('chat', 'normal') and msg["from"] == "blabler@blabler.pl":
-            pass
-            # msg.reply("Thanks for sending\n%(body)s" % msg).send()
+    def on_message(message):
+        if message['type'] in ('chat', 'normal') and message["from"] == TestingCredentials.whitelisted_sender:
+            answer = MessageHandler.handle(message['body'])
+            message.reply(answer).send()
 
 
 if __name__ == '__main__':
