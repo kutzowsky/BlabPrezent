@@ -5,7 +5,11 @@
 class MessageParser(object):
     @staticmethod
     def is_private(message):
-        return message.split(' ')[1] == '>>'
+        message_splitted = message.split(' ')
+        if len(message_splitted) == 1:
+            return False
+        else:
+            return message_splitted[1] == '>>'
 
     @staticmethod
     def get_sender_from(message):
