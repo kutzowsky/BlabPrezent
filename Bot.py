@@ -23,7 +23,8 @@ class Bot(ClientXMPP):
     def on_message(message):
         if message['type'] in ('chat', 'normal') and message["from"] == TestingCredentials.whitelisted_sender:
             answer = MessageHandler.handle(message['body'])
-            message.reply(answer).send()
+            if answer is not None:
+                message.reply(answer).send()
 
 
 if __name__ == '__main__':
