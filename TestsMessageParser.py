@@ -33,9 +33,11 @@ class TestsMessageParser(object):
         sender = MessageParser.get_sender_from(message)
         assert_equal(sender, expected_sender)
 
-    @data(('user1 > user2: ok :)', 'ok :)'),
-          ('user1 >> user2: nie ok :(', 'nie ok :('),
-          ('user1 >> user2: : aaaaa ::: bbbb :', ': aaaaa ::: bbbb :')
+    @data(('user1 > user2: ok :) | http://link.to.message', 'ok :)'),
+          ('user1 >> user2: nie ok :( | http://link.to.message', 'nie ok :('),
+          ('user1 >> user2: : aaaaa ::: bbbb : | http://link.to.message', ': aaaaa ::: bbbb :'),
+          ('user1 >> user2: : hello! | http://link.to.message', ': hello!'),
+          ('user1 >> user2: ||| hello! | http://link.to.message', '||| hello!')
     )
     @unpack
     def test_get_content_from_should_return_contents_from_directed_message(self, message, expected_content):

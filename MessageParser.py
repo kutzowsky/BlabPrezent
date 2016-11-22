@@ -17,4 +17,5 @@ class MessageParser(object):
 
     @staticmethod
     def get_content_from(message):
-        return message[message.index(':') + 2:]
+        # todo: refactor, bo to magia
+        return ''.join(message[message.index(':') + 2:].split(' | ')[:1])
