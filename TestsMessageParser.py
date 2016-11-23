@@ -11,7 +11,7 @@ from MessageParser import MessageParser
 @ddt
 class TestsMessageParser(object):
     def test_when_message_contains_two_less_than_symbols_in_second_column_is_private_should_return_true(self):
-        output = MessageParser.is_private('user1 >> user2: ok :)')
+        output = MessageParser.is_directed_private('user1 >> user2: ok :)')
         assert_true(output)
 
     @data(
@@ -21,7 +21,7 @@ class TestsMessageParser(object):
         '',
     )
     def test_when_message_not_contains_two_less_than_symbols_in_second_column_is_private_should_return_false(self, message):
-        output = MessageParser.is_private(message)
+        output = MessageParser.is_directed_private(message)
         assert_false(output)
 
     @data(

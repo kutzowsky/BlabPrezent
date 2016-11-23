@@ -4,12 +4,20 @@
 
 class MessageParser(object):
     @staticmethod
-    def is_private(message):
+    def is_directed_private(message):
         message_splitted = message.split(' ')
         if len(message_splitted) == 1:
             return False
         else:
             return message_splitted[1] == '>>'
+
+    @staticmethod
+    def is_directed_public(message):
+        message_splitted = message.split(' ')
+        if len(message_splitted) == 1:
+            return False
+        else:
+            return message_splitted[1] == '>'
 
     @staticmethod
     def get_sender_from(message):

@@ -17,7 +17,6 @@ class TestsMessageHandler(object):
     @data(
         'Konstantynopolitanczykowianeczka',
         'Cztery kuce w stajence. Nogi maja a nie rece.'
-        'lookash > seksiLejde: hey poklikash?'
     )
     def test_when_message_is_not_private_handle_should_return_none(self, message):
         answer = MessageHandler.handle(message)
@@ -32,3 +31,12 @@ class TestsMessageHandler(object):
         expected_message = ">>someuser: " + Strings.data_saved
         answer = MessageHandler.handle("someuser >> bot: BLABPREZENT Jan Kowalski, Winogronowa 123/3, Pcim Dolny")
         assert_equal(answer, expected_message)
+
+    @data(
+        "someuser > bot: Raz dwa trzy, próba mikrofonu!",
+        "someuser > bot: BLABPREZENT Jan Kowalski, Winogronowa 123/3, Pcim Dolny",
+    )
+    def test_when_someone_send_public_message_should_return_public_mesage_warn_text(self, message):
+        expected_answer = ">>someuser: " + Strings.public_message_warn
+        answer = MessageHandler.handle(message)
+        assert_equal(answer, expected_answer)

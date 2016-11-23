@@ -11,8 +11,9 @@ class MessageHandler(object):
     @staticmethod
     #todo uporzadkowac
     def handle(message):
-        if MessageParser.is_private(message):
-            sender = MessageParser.get_sender_from(message)
+        sender = MessageParser.get_sender_from(message)
+
+        if MessageParser.is_directed_private(message):
             message_content = MessageParser.get_content_from(message)
             if message_content.startswith('BLABPREZENT'):
                 try:
@@ -25,7 +26,11 @@ class MessageHandler(object):
             else:
                 return MessageHandler.__create_private_message(sender, Strings.help_text)
         else:
-            return None
+            if MessageParser.is_directed_public(message):
+
+                return MessageHandler.__create_private_message(sender, Strings.public_message_warn)
+            else:
+                return None
 
     @staticmethod
     def __create_private_message(recipient, content):
