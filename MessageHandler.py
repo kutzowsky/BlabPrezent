@@ -9,26 +9,27 @@ import Strings
 class MessageHandler(object):
     @staticmethod
     def handle(message):
+        if not MessageParser.is_directed(message):
+            return None
+
         sender = MessageParser.get_sender_from(message)
+        answer = None
 
         if MessageParser.is_directed_private(message):
-            message_content = MessageParser.get_content_from(message)
+            if MessageParser.has_blabprezent_command(message):
+                user_data = MessageParser.get_user_data_from(message)
 
-            if message_content.startswith(Strings.blabprezent_command):
-                address = message_content.strip(Strings.blabprezent_command + ' ')
                 try:
-                    DataManager.save_user_data(sender, address)
+                    DataManager.save_user_data(sender, user_data)
                 except:
                     answer = Strings.error_text
                 else:
                     answer = Strings.data_saved
             else:
                 answer = Strings.help_text
-        else:
-            if MessageParser.is_directed_public(message):
-                answer = Strings.public_message_warn
-            else:
-                return None
+
+        if MessageParser.is_directed_public(message):
+            answer = Strings.public_message_warn
 
         return MessageHandler.__create_private_message(sender, answer)
 

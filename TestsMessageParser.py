@@ -51,3 +51,26 @@ class TestsMessageParser(object):
     def test_get_content_from_should_return_contents_from_directed_message(self, message, expected_content):
         content = MessageParser.get_content_from(message)
         assert_equal(content, expected_content)
+
+
+    def when_message_has_blabprezent_command_has_blabprezent_command_metod_should_return_true(self):
+        message = 'someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
+
+        output = MessageParser.has_blabprezent_command(message)
+
+        assert_true(output)
+
+    def when_message_has_blabprezent_command_has_not_blabprezent_command_metod_should_return_false(self):
+        message = 'someuser >> bot: Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
+
+        output = MessageParser.has_blabprezent_command(message)
+
+        assert_false(output)
+
+    def when_message_has_blabprezent_command_get_user_data_from_method_should_extract_user_data(self):
+        message = 'someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
+        expected_user_data = 'Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
+
+        user_data = MessageParser.get_user_data_from(message)
+
+        assert_equal(expected_user_data, user_data)

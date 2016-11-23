@@ -30,12 +30,12 @@ class TestsMessageHandler(object):
 
     def test_when_private_message_content_starts_with_blabprezent_command_should_return_data_saved_text_private_message(self):
         expected_message = ">>someuser: " + Strings.data_saved
-        answer = MessageHandler.handle("someuser >> bot: BLABPREZENT Jan Kowalski, Winogronowa 123/3, Pcim Dolny")
+        answer = MessageHandler.handle("someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny")
         assert_equal(answer, expected_message)
 
     @data(
         "someuser > bot: Raz dwa trzy, próba mikrofonu!",
-        "someuser > bot: BLABPREZENT Jan Kowalski, Winogronowa 123/3, Pcim Dolny",
+        "someuser > bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny",
     )
     def test_when_someone_send_public_message_should_return_public_mesage_warn_text(self, message):
         expected_answer = ">>someuser: " + Strings.public_message_warn
@@ -44,7 +44,7 @@ class TestsMessageHandler(object):
 
     @patch('DataManager.DataManager.save_user_data')
     def test_when_private_message_content_starts_with_blabprezent_command_should_call_datamanager_save_data(self, save_data):
-        message = "someuser >> bot: BLABPREZENT Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
+        message = "someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
         expected_save_data_args = ('someuser', 'Jan Kowalski, Winogronowa 123/3, Pcim Dolny')
 
         MessageHandler.handle(message)
@@ -56,7 +56,7 @@ class TestsMessageHandler(object):
 
     @patch('DataManager.DataManager.save_user_data')
     def test_when_saving_data_throws_exception_should_return_error_text(self, save_data):
-        message = "someuser >> bot: BLABPREZENT Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
+        message = "someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
         expected_answer = ">>someuser: " + Strings.error_text
         save_data.side_effect = Exception
 
