@@ -10,7 +10,15 @@ from MessageParser import MessageParser
 
 @ddt
 class TestsMessageParser(object):
-    def test_when_message_contains_two_less_than_symbols_in_second_column_is_private_should_return_true(self):
+    @data(
+        'user1 > user2: ok :)',
+        'user1 >> user2: ok :)'
+    )
+    def test_when_message_contains_two_or_one_less_than_symbols_in_second_column_is_directed_should_return_true(self, message):
+        output = MessageParser.is_directed(message)
+        assert_true(output)
+
+    def test_when_message_contains_two_less_than_symbols_in_second_column_is_private_directed_should_return_true(self):
         output = MessageParser.is_directed_private('user1 >> user2: ok :)')
         assert_true(output)
 
@@ -20,7 +28,7 @@ class TestsMessageParser(object):
         'Bla bla blaaa',
         '',
     )
-    def test_when_message_not_contains_two_less_than_symbols_in_second_column_is_private_should_return_false(self, message):
+    def test_when_message_not_contains_two_less_than_symbols_in_second_column_is_private_directed_should_return_false(self, message):
         output = MessageParser.is_directed_private(message)
         assert_false(output)
 
