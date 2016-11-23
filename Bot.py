@@ -5,7 +5,7 @@ import logging
 
 from sleekxmpp import ClientXMPP
 
-from MessageHandler import MessageHandler
+import messagehandler
 import TestingCredentials
 
 
@@ -22,7 +22,7 @@ class Bot(ClientXMPP):
     @staticmethod
     def on_message(message):
         if message['type'] in ('chat', 'normal') and message["from"] == TestingCredentials.whitelisted_sender:
-            answer = MessageHandler.handle(message['body'])
+            answer = messagehandler.handle(message['body'])
             if answer is not None:
                 message.reply(answer).send()
 
