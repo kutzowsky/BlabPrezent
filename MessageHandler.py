@@ -6,7 +6,6 @@ from DataManager import DataManager
 import Strings
 
 #todo: moduly zamiast klas ze statycznymi metodami
-#todo: testy na wykorzystanie DataManagera
 class MessageHandler(object):
     @staticmethod
     #todo uporzadkowac
