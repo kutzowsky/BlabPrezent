@@ -9,5 +9,5 @@ def save_user_data(username, address):
 
     with connection:
         cursor = connection.cursor()
-        sql_query = "INSERT INTO Addresses VALUES('{}', '{}')".format(username, address)
-        cursor.execute(sql_query)
+        sql_query = "INSERT INTO Addresses VALUES (?, ?)"
+        cursor.execute(sql_query, (username, address))
