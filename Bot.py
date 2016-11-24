@@ -28,8 +28,25 @@ class Bot(ClientXMPP):
                 message.reply(answer).send()
 
 
+def _set_logger():
+    global logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    file_handler = logging.FileHandler('bot.log')
+    file_handler.setLevel(logging.DEBUG)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG, format='%(levelname)-8s %(message)s')
+    _set_logger()
+
+    logger.info('Started')
 
     bot_configuration = configreader.get_bot_configuration()
 

@@ -5,7 +5,7 @@ Aktualnie w fazie ostregro rozwoju, to nie przyzwyczajaj się do tego, co tu wid
 
 ##TODO ASAP
  * ~~podstawowe opcje do pliku konfiguracyjnego,~~
- * logi, logi, logi,
+ * ~~logi, logi, logi,~~
  * losowanie przydziału prezentów,
  * wysyłanie przydziału wraz z danymi usera,
  * potwierdzenie wysłania prezentu,
