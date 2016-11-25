@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-_BLABPREZENT_COMMAND = 'blabprezent'
+_ADD_COMMAND = 'dodaj'
 
 
 def is_directed(message):
@@ -44,11 +44,11 @@ def _trim_usernames(message):
     return message[message.index(':') + 2:]
 
 
-def has_blabprezent_command(message):
+def has_add_command(message):
     message_content = get_content_from(message)
-    return message_content.startswith(_BLABPREZENT_COMMAND)
+    return message_content.startswith(_ADD_COMMAND)
 
 
 def get_user_data_from(message):
     message_content = get_content_from(message)
-    return  message_content.strip(_BLABPREZENT_COMMAND + ' ')
+    return  message_content.strip(_ADD_COMMAND + ' ')

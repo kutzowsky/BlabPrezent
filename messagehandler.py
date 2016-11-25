@@ -20,8 +20,8 @@ def handle(message):
     if messageparser.is_directed_private(message):
         logger.info('Directed private message: ' + message)
 
-        if messageparser.has_blabprezent_command(message):
-            logger.info('Got blabprezent command')
+        if messageparser.has_add_command(message):
+            logger.info('Got add command')
             user_data = messageparser.get_user_data_from(message)
 
             try:

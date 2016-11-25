@@ -53,22 +53,22 @@ class TestsMessageParser(object):
         assert_equal(content, expected_content)
 
 
-    def when_message_has_blabprezent_command_has_blabprezent_command_metod_should_return_true(self):
-        message = 'someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
+    def when_message_has_add_command_has_add_command_metod_should_return_true(self):
+        message = 'someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
 
-        output = messageparser.has_blabprezent_command(message)
+        output = messageparser.has_add_command(message)
 
         assert_true(output)
 
-    def when_message_has_blabprezent_command_has_not_blabprezent_command_metod_should_return_false(self):
+    def when_message_has_add_command_has_not_add_command_metod_should_return_false(self):
         message = 'someuser >> bot: Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
 
-        output = messageparser.has_blabprezent_command(message)
+        output = messageparser.has_add_command(message)
 
         assert_false(output)
 
-    def when_message_has_blabprezent_command_get_user_data_from_method_should_extract_user_data(self):
-        message = 'someuser >> bot: blabprezent Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
+    def when_message_has_add_command_get_user_data_from_method_should_extract_user_data(self):
+        message = 'someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
         expected_user_data = 'Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
 
         user_data = messageparser.get_user_data_from(message)
