@@ -66,10 +66,13 @@ class TestsMessageParser(object):
 
         assert_false(output)
 
-    def test_when_message_has_add_command_get_user_data_from_method_should_extract_user_data(self):
-        message = 'someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
-        expected_user_data = 'Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
-
+    @data(
+        ('someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny', 'Jan Kowalski, Winogronowa 123/3, Pcim Dolny'),
+        ('someuser >> bot: dodaj Świnka Peppa Bekonu 3 12-345 Warszawa', 'Świnka Peppa Bekonu 3 12-345 Warszawa'),
+        ('someuser >> bot: dodaj Agnieszka Kowalska Juztutajniemieszka 123 11-111 Brzydgoszcz', 'Agnieszka Kowalska Juztutajniemieszka 123 11-111 Brzydgoszcz')
+    )
+    @unpack
+    def test_when_message_has_add_command_get_user_data_from_method_should_extract_user_data(self, message, expected_user_data):
         user_data = messageparser.get_user_data_from(message)
 
         assert_equal(expected_user_data, user_data)

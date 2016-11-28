@@ -51,4 +51,4 @@ def has_add_command(message):
 
 def get_user_data_from(message):
     message_content = get_content_from(message)
-    return  message_content.strip(_ADD_COMMAND + ' ')
+    return  message_content.replace(_ADD_COMMAND + ' ', '')
