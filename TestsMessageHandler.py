@@ -42,7 +42,7 @@ class TestsMessageHandler(object):
         answer = messagehandler.handle(message)
         assert_equal(answer, expected_answer)
 
-    @patch('DataManager.DataManager.save_user_data')
+    @patch('datamanager.save_user_data')
     def test_when_private_message_content_starts_with_add_command_should_call_datamanager_save_data(self, save_data):
         message = "someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
         expected_save_data_args = ('someuser', 'Jan Kowalski, Winogronowa 123/3, Pcim Dolny')
@@ -54,7 +54,7 @@ class TestsMessageHandler(object):
         assert_true(save_data.called)
         assert_equal(args, expected_save_data_args)
 
-    @patch('DataManager.DataManager.save_user_data')
+    @patch('datamanager.save_user_data')
     def test_when_saving_data_throws_exception_should_return_error_text(self, save_data):
         message = "someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
         expected_answer = ">>someuser: " + strings.error_text
@@ -65,7 +65,7 @@ class TestsMessageHandler(object):
         assert_true(save_data.called)
         assert_equal(answer, expected_answer)
 
-    @patch('DataManager.DataManager.save_user_data')
+    @patch('datamanager.save_user_data')
     def test_when_private_message_content_not_starts_with_add_command_should_not_call_datamanager_save_data(self, save_data):
         message = "someuser >> bot: O co chodzi?"
 
@@ -73,7 +73,7 @@ class TestsMessageHandler(object):
 
         assert_false(save_data.called)
 
-    @patch('DataManager.DataManager.save_user_data')
+    @patch('datamanager.save_user_data')
     def test_when_message_is_not_directed_should_not_call_datamanager_save_data(self, save_data):
         message = "Tralalalala"
 
