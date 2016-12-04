@@ -54,34 +54,6 @@ class TestsMessageParser(object):
         content = messageparser.get_content_from(message)
         assert_equal(content, expected_content)
 
-    def test_when_message_has_add_command_has_add_command_metod_should_return_true(self):
-        message = 'someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
-
-        output = messageparser.has_add_command(message)
-
-        assert_true(output)
-
-    def test_when_message_has_add_command_has_not_add_command_metod_should_return_false(self):
-        message = 'someuser >> bot: Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
-
-        output = messageparser.has_add_command(message)
-
-        assert_false(output)
-
-    @data(
-        ('someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny',
-         'Jan Kowalski, Winogronowa 123/3, Pcim Dolny'),
-        ('someuser >> bot: dodaj Świnka Peppa Bekonu 3 12-345 Warszawa', 'Świnka Peppa Bekonu 3 12-345 Warszawa'),
-        ('someuser >> bot: dodaj Agnieszka Kowalska Juztutajniemieszka 123 11-111 Brzydgoszcz',
-         'Agnieszka Kowalska Juztutajniemieszka 123 11-111 Brzydgoszcz')
-    )
-    @unpack
-    def test_when_message_has_add_command_get_user_data_from_method_should_extract_user_data(self, message,
-                                                                                             expected_user_data):
-        user_data = messageparser.get_user_data_from(message)
-
-        assert_equal(expected_user_data, user_data)
-
     def test_when_message_content_is_not_empty_get_command_from_should_return_first_word_from_message_content(self):
         message_content = 'rule the world!'
         expected_command = 'rule'

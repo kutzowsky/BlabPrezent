@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-_ADD_COMMAND = 'dodaj'
-
-
 def is_directed(message):
     message_splitted = message.split(' ')
     if len(message_splitted) == 1:
@@ -36,22 +33,13 @@ def get_content_from(message):
     return message_without_usernames
 
 
-def has_add_command(message):
-    message_content = get_content_from(message)
-    return message_content.startswith(_ADD_COMMAND)
-
-
-def get_user_data_from(message):
-    message_content = get_content_from(message)
-    return message_content.replace(_ADD_COMMAND + ' ', '')
-
-
 def get_command_from(message):
     return message.split()[0] if message else None
 
 
 def remove_command_from(message):
     return ' '.join(message.split()[1:]) if message else None
+
 
 def _trim_message_link(message):
     return ''.join(message.split(' | ')[:1])
