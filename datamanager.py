@@ -23,6 +23,7 @@ def save_gift_assignment(gifter, gifted):
     sql_query = "INSERT INTO GiftAssignment VALUES (?, ?)"
     _execute_sql_guery(sql_query, (gifter, gifted))
 
+
 def get_gift_assignments():
     sql_query = "SELECT gifter, gifted FROM GiftAssignment"
     return _execute_sql_guery(sql_query)
@@ -31,6 +32,16 @@ def get_gift_assignments():
 def get_address_for(user):
     sql_query = "SELECT address FROM Addresses WHERE user LIKE ?"
     return _execute_sql_guery(sql_query, (user,)).fetchone()[0]
+
+
+def save_send_confirmation(user, datetime):  # sqlite3.IntegrityError jak duplikat
+    sql_query = "INSERT INTO SentConfirmations VALUES (?, ?)"
+    _execute_sql_guery(sql_query, (user, datetime))
+
+
+def save_received_confirmation(user, datetime):
+    sql_query = "INSERT INTO ReceivedConfirmations VALUES (?, ?)"
+    _execute_sql_guery(sql_query, (user, datetime))
 
 
 def _execute_sql_guery(query, args=None):
