@@ -5,8 +5,8 @@ import logging
 
 from sleekxmpp import ClientXMPP
 
-import messagehandler
-import configreader
+from config import configreader
+from messaging import messagehandler
 
 
 class Bot(ClientXMPP):
