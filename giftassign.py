@@ -3,7 +3,7 @@
 
 import random
 
-import datamanager
+from dal import datamanager
 
 #todo otestowac jakos
 all_participants = datamanager.get_participants()
