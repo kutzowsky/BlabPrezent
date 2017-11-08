@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-class BotConfiguration(object):
+class BotConfiguration():
     def __init__(self):
         self.jid = None
         self.password = None

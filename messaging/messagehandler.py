@@ -3,7 +3,7 @@
 
 import logging
 
-import messageparser
+from . import messageparser
 from commandhandlers import addinghandler as messagecontenthandler
 from config import strings
 
@@ -32,4 +32,4 @@ def handle(message):
 
 
 def _create_private_message(recipient, content):
-    return u">>{}: {}".format(recipient, content)
+    return ">>{}: {}".format(recipient, content)

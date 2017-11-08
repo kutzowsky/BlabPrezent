@@ -11,7 +11,7 @@ from messaging import messagehandler
 
 
 @ddt
-class TestsMessageHandler(object):
+class TestsMessageHandler():
     def test_handle_should_not_throw(self):
         messagehandler.handle('some message not a massage')
 

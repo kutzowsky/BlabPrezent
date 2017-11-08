@@ -14,7 +14,7 @@ from config import strings
 
 
 @ddt
-class TestsConfirmationsHandler(object):
+class TestsConfirmationsHandler():
     def test_handle_message_content_should_not_throw(self):
         confirmationshandler.handle_message_content('user', 'content')
 
@@ -46,7 +46,7 @@ class TestsConfirmationsHandler(object):
 
     @data(
         'wyslano',
-        u'wysłano'
+        'wysłano'
     )
     @patch('dal.datamanager.save_send_confirmation')
     @freeze_time("2012-01-14 12:12")
@@ -62,7 +62,7 @@ class TestsConfirmationsHandler(object):
 
     @data(
         'wyslano',
-        u'wysłano'
+        'wysłano'
     )
     @patch('dal.datamanager.save_send_confirmation')
     def test_when_successfully_saved_sent_confirmation_should_return_sent_confirmation_saved_test(self, message, save_send_confirmation):
@@ -74,7 +74,7 @@ class TestsConfirmationsHandler(object):
 
     @data(
         'wyslano',
-        u'wysłano',
+        'wysłano',
     )
     @patch('dal.datamanager.save_send_confirmation')
     def test_when_saving_duplicated_confirmation_should_return_confirmation_already_exists_text(self, message, save_send_confirmation):
@@ -87,7 +87,7 @@ class TestsConfirmationsHandler(object):
 
     @data(
         'wyslano',
-        u'wysłano',
+        'wysłano',
     )
     @patch('dal.datamanager.save_send_confirmation')
     def test_when_there_is_error_on_savind_sent_confirmation_should_return_error_text(self, message, save_send_confirmation):

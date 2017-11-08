@@ -15,7 +15,7 @@ logger = logging.getLogger()
 def handle_message_content(sender, message_content):
     handling_functions = {'dodaj': _handle_add,
                           'wyslano': _handle_sent_confirmation,
-                          u'wysłano': _handle_sent_confirmation,
+                          'wysłano': _handle_sent_confirmation,
                           'otrzymano': _handle_received_confirmation}
 
     command = messageparser.get_command_from(message_content)

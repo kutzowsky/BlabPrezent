@@ -9,7 +9,7 @@ from commandhandlers import addinghandler
 from config import strings
 
 
-class TestsAddingHandler(object):
+class TestsAddingHandler():
     def test_handle_message_content_should_not_throw(self):
         addinghandler.handle_message_content('user', 'content')
 

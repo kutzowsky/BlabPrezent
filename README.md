@@ -10,7 +10,7 @@ Zasady zbliżone są do szkolnej loterii mikołajkowej.
 4. Uczestnicy potwierdzają wysłanie/odebranie przesyłki pisząc odpowiednią wiadomośc do bota. (`Bot.py` w trybie zbierania potwierdzeń).
 
 ## Trochę więcej szczegółów
-* **Język:** Python (jeszcze v2),
+* **Język:** Python 3
 * **Zależności:** patrz `requirements.txt`,
 * **Zasada działania:** bot XMPP parsujący wiadomości od bota mikroblogowego, zapisujący dane w bazie SQLite i wysyłający odpowiednie odpowiedzi.
 
