@@ -9,7 +9,7 @@ from messaging import messageparser
 
 
 @ddt
-class TestsMessageParser(object):
+class TestsMessageParser():
     @data(
         'user1 > user2: ok :)',
         'user1 >> user2: ok :)'

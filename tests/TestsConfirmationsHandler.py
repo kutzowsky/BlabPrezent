@@ -14,7 +14,7 @@ from config import strings
 
 
 @ddt
-class TestsConfirmationsHandler(object):
+class TestsConfirmationsHandler():
     def test_handle_message_content_should_not_throw(self):
         confirmationshandler.handle_message_content('user', 'content')
 
