@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import ConfigParser
+import configparser
 import logging
 
 from config.BotConfiguration import BotConfiguration
@@ -11,7 +11,7 @@ _CONFIG_LOCATION = 'configuration.ini'
 logger = logging.getLogger()
 
 def get_bot_configuration():
-    config_parser = ConfigParser.ConfigParser()
+    config_parser = configparser.ConfigParser()
     config_parser.read(_CONFIG_LOCATION)
 
     bot_configuration = BotConfiguration()

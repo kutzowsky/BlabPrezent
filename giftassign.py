@@ -15,6 +15,6 @@ for participant in all_participants:
     while to_gift == participant:
         to_gift = random.choice(participants_without_gift)
 
-    print participant, '->', to_gift
+    print(participant, '->', to_gift)
     datamanager.save_gift_assignment(participant, to_gift)
     participants_without_gift.remove(to_gift)
