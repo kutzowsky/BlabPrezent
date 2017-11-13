@@ -5,9 +5,8 @@ import logging
 
 from sleekxmpp import ClientXMPP
 
-import configreader
-import datamanager
-import strings
+from config import configreader, strings
+from dal import datamanager
 
 
 class GiftAssignmentSender(ClientXMPP):

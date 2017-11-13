@@ -1,20 +1,18 @@
-# BlabPrezent
+# BlabPrezent [![Build Status](https://travis-ci.org/kucyk/BlabPrezent.svg?branch=master)](https://travis-ci.org/kucyk/BlabPrezent)
 Bot obsługujący loterię prezentową w pewnym serwisie mikroblogowym.
 
-Aktualnie w fazie ostregro rozwoju, to nie przyzwyczajaj się do tego, co tu widzisz.
+## Ogólne zasady loterii
+Zasady zbliżone są do szkolnej loterii mikołajkowej.
 
-~~##TODO ASAP~~
- * ~~podstawowe opcje do pliku konfiguracyjnego,~~
- * ~~logi, logi, logi,~~
- * ~~losowanie przydziału prezentów,~~
- * ~~wysyłanie przydziału wraz z danymi usera,~~
- * ~~potwierdzenie wysłania prezentu,~~
- * ~~potwierdzenie odebrania prezentu~~
+1. Chętni zgłaszają się do zabawy pisząc odpowiednią wiadomośc do bota (`Bot.py` w trybie zbierania danych).
+2. Drugą fazą jest losowanie kto komu kupuje prezent (`giftassign.py`).
+3. Powiadomienie uczestników o wynikach losowania (`GiftAssignmentSender.py`).
+4. Uczestnicy potwierdzają wysłanie/odebranie przesyłki pisząc odpowiednią wiadomośc do bota. (`Bot.py` w trybie zbierania potwierdzeń).
 
-##TODO na dalszy fjuczer
- * podział na katalogi,
- * Travis CI,
- * obsługa Pythona 3 (jak mi się zachce)
+## Trochę więcej szczegółów
+* **Język:** Python 3
+* **Zależności:** patrz `requirements.txt`,
+* **Zasada działania:** bot XMPP parsujący wiadomości od bota mikroblogowego, zapisujący dane w bazie SQLite i wysyłający odpowiednie odpowiedzi.
 
-##Pytania, sugestie, chęć pomocy?
-Chętnie, znajdź mnie w internetach i pisz.
+## Chcę pomóc!
+Świetnie. Zawsze przyda się więcej chęci, refactoringu, testów, ficzerów, owsa, marchewki i podobnych. Patrz w issues, rób pull requesty i kontaktuj się ze mną.
