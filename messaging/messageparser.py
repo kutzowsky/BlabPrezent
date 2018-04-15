@@ -34,7 +34,7 @@ def get_content_from(message):
 
 
 def get_command_from(message):
-    return message.split()[0] if message else None
+    return message.split()[0].lower() if message else None
 
 
 def remove_command_from(message):
