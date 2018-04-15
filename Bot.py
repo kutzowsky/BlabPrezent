@@ -31,6 +31,7 @@ class Bot(ClientXMPP):
 def _set_logger():
     global logger
     logger = logging.getLogger()
+    mypydupa = 'dupa'
     logger.setLevel(logging.INFO)
     file_handler = logging.FileHandler('bot.log')
     file_handler.setLevel(logging.DEBUG)
