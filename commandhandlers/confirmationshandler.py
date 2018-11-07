@@ -18,7 +18,7 @@ def handle_message_content(sender, message_content):
                           'wysłano': _handle_sent_confirmation,
                           'otrzymano': _handle_received_confirmation}
 
-    command = messageparser.get_command_from(message_content)
+    command = messageparser.get_command_from(message_content).lower()
 
     try:
         return handling_functions[command](sender)

@@ -13,7 +13,7 @@ logger = logging.getLogger()
 def handle_message_content(sender, message_content):
     handling_functions = {'dodaj': _handle_add}
 
-    command = messageparser.get_command_from(message_content)
+    command = messageparser.get_command_from(message_content).lower()
     arguments = messageparser.remove_command_from(message_content)
 
     try:
