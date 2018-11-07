@@ -112,7 +112,7 @@ class TestsConfirmationsHandler():
         assert_equals(args, expected_args)
 
     @patch('dal.datamanager.save_received_confirmation')
-    def test_when_successfully_saved_received_confirmation_should_return_received_confirmation_saved_test(self, save_send_confirmation):
+    def test_when_successfully_saved_received_confirmation_should_return_received_confirmation_saved_test(self, save_received_confirmation):
         user = 'someuser'
         message = 'otrzymano'
 
@@ -139,3 +139,20 @@ class TestsConfirmationsHandler():
         answer = confirmationshandler.handle_message_content(user, message)
 
         assert_equal(answer, strings.error_text)
+
+    @data(
+        'Wyslano',
+        'wysłano',
+        'Wyslano',
+        'wysłaNO',
+        'OTRZYMANO',
+        'otrzymano',
+    )
+    @patch('dal.datamanager.save_send_confirmation')
+    @patch('dal.datamanager.save_received_confirmation')
+    def test_when_command_has_different_letter_case_should_also_recognize_it(self, message, save_send_confirmation, save_received_confirmation):
+        user = 'someuser'
+
+        answer = confirmationshandler.handle_message_content(user, message)
+
+        assert_not_equal(answer, strings.help_text)
