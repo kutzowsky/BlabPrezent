@@ -4,11 +4,13 @@
 
 from mock import patch
 from nose.tools import *
+from ddt import ddt, data
 
 from commandhandlers import addinghandler
 from config import strings
 
 
+@ddt
 class TestsAddingHandler():
     def test_handle_message_content_should_not_throw(self):
         addinghandler.handle_message_content('user', 'content')
@@ -25,7 +27,7 @@ class TestsAddingHandler():
         assert_false(save_user_data.called)
 
     @patch('dal.datamanager.save_user_data')
-    def test_when_message_has_no_add_command_should_try_to_save_data(self, save_user_data):
+    def test_when_message_has_add_command_should_try_to_save_data(self, save_user_data):
         user = 'anna'
         message = 'dodaj Anna Maria Smutna 22-111 Ma twarz'
         expected_save_user_data_args = (user, 'Anna Maria Smutna 22-111 Ma twarz')
@@ -49,3 +51,17 @@ class TestsAddingHandler():
         answer = addinghandler.handle_message_content('user', 'dodaj mnie!')
 
         assert_equal(answer, strings.error_text)
+
+    @data(
+        'DODAJ',
+        'DoDaj',
+        'dodaj',
+        'Dodaj',
+    )
+    @patch('dal.datamanager.save_user_data')
+    def test_when_command_has_different_letter_case_should_also_recognize_it(self, message, save_user_data):
+        user = 'someuser'
+
+        answer = addinghandler.handle_message_content(user, message)
+
+        assert_not_equal(answer, strings.help_text)
