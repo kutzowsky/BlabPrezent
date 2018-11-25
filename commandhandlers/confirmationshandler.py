@@ -32,6 +32,11 @@ def _handle_sent_confirmation(sender):
 
     try:
         logger.info('Trying to save sent confirmation for user: ' + sender)
+
+        participants = datamanager.get_participants()
+        if sender not in participants:
+            return strings.not_a_participant
+
         datamanager.save_send_confirmation(sender, datetime.datetime.now())
     except IntegrityError:
         logger.warn('Duplicated sent confirmation')
@@ -45,10 +50,15 @@ def _handle_sent_confirmation(sender):
 
 
 def _handle_received_confirmation(sender):
-    logger.info('Got sent confirmation')
+    logger.info('Got received confirmation')
 
     try:
         logger.info('Trying to save received confirmation for user: ' + sender)
+
+        participants = datamanager.get_participants()
+        if sender not in participants:
+            return strings.not_a_participant
+
         datamanager.save_received_confirmation(sender, datetime.datetime.now())
     except IntegrityError:
         logger.warn('Duplicated received confirmation')
