@@ -4,7 +4,7 @@
 import logging
 import ssl
 
-from sleekxmpp import ClientXMPP
+from slixmpp import ClientXMPP
 
 from config import configreader
 from messaging import messagehandler
@@ -55,4 +55,4 @@ if __name__ == '__main__':
 
     bot = Bot(bot_configuration)
     bot.connect()
-    bot.process(block=False)
+    bot.process()
