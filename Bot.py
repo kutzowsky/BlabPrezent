@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import ssl
 
-from sleekxmpp import ClientXMPP
+from slixmpp import ClientXMPP
 
 from config import configreader
 from messaging import messagehandler
@@ -18,8 +17,6 @@ class Bot(ClientXMPP):
         self.add_event_handler("message", self.on_message)
 
         self.blabler_bot_jid = bot_configuration.blabler_bot_jid
-
-        self.ssl_version = ssl.PROTOCOL_SSLv23
 
     def on_session_start(self, _):
         self.send_presence()
@@ -55,4 +52,4 @@ if __name__ == '__main__':
 
     bot = Bot(bot_configuration)
     bot.connect()
-    bot.process(block=False)
+    bot.process()

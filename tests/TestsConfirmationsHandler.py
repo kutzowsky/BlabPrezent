@@ -96,7 +96,8 @@ class TestsConfirmationsHandler():
         'wysłano',
     )
     @patch('dal.datamanager.save_send_confirmation')
-    def test_when_there_is_error_on_saving_sent_confirmation_should_return_error_text(self, message, save_send_confirmation):
+    @patch('dal.datamanager.get_participants')
+    def test_when_there_is_error_on_saving_sent_confirmation_should_return_error_text(self, message, save_send_confirmation, get_participants):
         user = 'someuser'
         save_send_confirmation.side_effect = Exception
 
@@ -143,7 +144,8 @@ class TestsConfirmationsHandler():
         assert_equal(answer, strings.confirmation_already_exists)
 
     @patch('dal.datamanager.save_received_confirmation')
-    def test_when_there_is_error_on_saving_received_confirmation_should_return_error_text(self, save_received_confirmation):
+    @patch('dal.datamanager.get_participants')
+    def test_when_there_is_error_on_saving_received_confirmation_should_return_error_text(self, save_received_confirmation, get_participants):
         user = 'someuser'
         message = 'otrzymano'
         save_received_confirmation.side_effect = Exception
@@ -176,7 +178,8 @@ class TestsConfirmationsHandler():
     )
     @patch('dal.datamanager.save_send_confirmation')
     @patch('dal.datamanager.save_received_confirmation')
-    def test_when_command_has_different_letter_case_should_also_recognize_it(self, message, save_send_confirmation, save_received_confirmation):
+    @patch('dal.datamanager.get_participants')
+    def test_when_command_has_different_letter_case_should_also_recognize_it(self, message, save_send_confirmation, save_received_confirmation, get_participants):
         user = 'someuser'
 
         answer = confirmationshandler.handle_message_content(user, message)
