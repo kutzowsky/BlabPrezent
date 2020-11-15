@@ -1,4 +1,4 @@
-# BlabPrezent [![Build Status](https://travis-ci.org/kucyk/BlabPrezent.svg?branch=master)](https://travis-ci.org/kucyk/BlabPrezent)
+# BlabPrezent [![Build Status](https://travis-ci.org/kutzowsky/BlabPrezent.svg?branch=master)](https://travis-ci.org/kutzowsky/BlabPrezent)
 Bot obsługujący loterię prezentową w pewnym serwisie mikroblogowym.
 
 ## Ogólne zasady loterii
