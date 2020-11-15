@@ -3,7 +3,7 @@
 
 import logging
 
-from sleekxmpp import ClientXMPP
+from slixmpp import ClientXMPP
 
 from config import configreader, strings
 from dal import datamanager
@@ -57,4 +57,4 @@ if __name__ == '__main__':
 
     bot = GiftAssignmentSender(bot_configuration)
     bot.connect()
-    bot.process(block=False)
+    bot.process()
