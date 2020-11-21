@@ -4,6 +4,7 @@ import logging
 
 from wwwparsing import BlabWebsiteClient
 from config import configreader
+from messaging import messagehandler
 
 
 class WebsiteParsingBot:
@@ -72,18 +73,12 @@ class WebsiteParsingBot:
             full_text = message['text']
             self.logger.debug(f'Got message:  {full_text}')
 
-            is_private = '>>' in full_text
+            answer = messagehandler.handle(full_text)
+            if answer is not None:
+                self.logger.debug(f'Sending answer:  {answer}')
+                self._send_message(answer)
 
-            nick = full_text.split(' ')[0]
-            text = full_text.split(':')[1].strip()
-
-            if is_private:
-                answer = f'>>{nick}: {text}'
-            else:
-                answer = f'>{nick}: {text}'
-
-            self.logger.debug(f'Sending answer:  {answer}')
-            self._send_message(answer)
+            time.sleep(1)   # small delay just in case to keep message spam protection happy
 
 
 def _set_logger():
