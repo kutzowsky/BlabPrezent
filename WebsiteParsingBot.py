@@ -25,12 +25,17 @@ class WebsiteParsingBot:
         pickle.dump(latest_message, open(self.latest_message_file_name, 'wb'))
 
     def start_listening(self, sleep_seconds=60.0):
+        self.logger.info(f'Listening started. Sleep timeout set to: {sleep_seconds}s')
+
         while True:
             try:
                 self._handle_new_messages()
-                time.sleep(sleep_seconds)
             except KeyboardInterrupt:
                 break
+            except Exception as exc:
+                self.logger.error(f'Error occurred. Waiting {sleep_seconds}s before retry.', exc)
+            finally:
+                time.sleep(sleep_seconds)
 
     def _send_message(self, message_text):
         self.website_client.send_message(message_text)
