@@ -1,0 +1,6 @@
+slixmpp~=1.8.2
+mechanicalsoup~=1.2.0
+ddt~=1.6.0
+freezegun~=1.2.2
+mock~=4.0.3
+nose2~=0.12.0
