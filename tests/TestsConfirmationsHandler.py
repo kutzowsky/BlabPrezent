@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import datetime
 from sqlite3 import IntegrityError
@@ -14,7 +13,7 @@ from config import strings
 
 
 @ddt
-class TestsConfirmationsHandler():
+class TestsConfirmationsHandler:
     def test_handle_message_content_should_not_throw(self):
         confirmationshandler.handle_message_content('user', 'content')
 

@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 
 def is_directed(message):
     message_splitted = message.split(' ')

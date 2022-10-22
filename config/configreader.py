@@ -1,18 +1,14 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import configparser
 import logging
 
 from config.BotConfiguration import BotConfiguration
 
-
 logger = logging.getLogger()
 
 
 def get_bot_configuration(config_file_path='configuration.ini'):
-
-
     config_parser = configparser.ConfigParser()
     dataset = config_parser.read(config_file_path)
 

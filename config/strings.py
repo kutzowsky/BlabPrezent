@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 help_text = 'Jestem botem o bardzo małym rozumku i nie rozumiem :(. Pomoc na: [jeszcze nie ma, bo to tylko testy]'
 data_saved = 'Zapisałem poprawnie Twoje dane. Cierpliwie czekaj na losowanie.'
