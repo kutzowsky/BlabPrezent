@@ -1,0 +1,4 @@
+slixmpp~=1.8.2
+mechanicalsoup~=1.2.0
+
+

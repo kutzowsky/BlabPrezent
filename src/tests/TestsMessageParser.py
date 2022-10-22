@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 
 from ddt import ddt, data, unpack
 from nose.tools import *
@@ -9,7 +7,7 @@ from messaging import messageparser
 
 
 @ddt
-class TestsMessageParser():
+class TestsMessageParser:
     @data(
         'user1 > user2: ok :)',
         'user1 >> user2: ok :)'

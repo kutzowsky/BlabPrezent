@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import datetime
 import logging
@@ -39,10 +38,10 @@ def _handle_sent_confirmation(sender):
 
         datamanager.save_send_confirmation(sender, datetime.datetime.now())
     except IntegrityError:
-        logger.warn('Duplicated sent confirmation')
+        logger.warning('Duplicated sent confirmation')
         return strings.confirmation_already_exists
     except Exception as exc:
-        logger.warn('Sent confirmation saving failed. Reason: ' + str(exc))
+        logger.warning('Sent confirmation saving failed. Reason: ' + str(exc))
         return strings.error_text
     else:
         logger.info('Sent confirmation saved')
@@ -61,10 +60,10 @@ def _handle_received_confirmation(sender):
 
         datamanager.save_received_confirmation(sender, datetime.datetime.now())
     except IntegrityError:
-        logger.warn('Duplicated received confirmation')
+        logger.warning('Duplicated received confirmation')
         return strings.confirmation_already_exists
     except Exception as exc:
-        logger.warn('Received confirmation saving failed. Reason: ' + str(exc))
+        logger.warning('Received confirmation saving failed. Reason: ' + str(exc))
         return strings.error_text
     else:
         logger.info('Sent confirmation saved')

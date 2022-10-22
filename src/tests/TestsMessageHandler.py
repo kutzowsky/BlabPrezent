@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 
 from ddt import ddt, data
@@ -11,7 +10,7 @@ from messaging import messagehandler
 
 
 @ddt
-class TestsMessageHandler():
+class TestsMessageHandler:
     def test_handle_should_not_throw(self):
         messagehandler.handle('some message not a massage')
 

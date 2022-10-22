@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 
 from mock import patch
 from nose.tools import *
@@ -11,7 +9,7 @@ from config import strings
 
 
 @ddt
-class TestsAddingHandler():
+class TestsAddingHandler:
     def test_handle_message_content_should_not_throw(self):
         addinghandler.handle_message_content('user', 'content')
 

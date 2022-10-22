@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import logging
 
@@ -30,7 +29,7 @@ def _handle_add(sender, user_data):
         logger.info('Trying save data for user: ' + sender)
         datamanager.save_user_data(sender, user_data)
     except Exception as exc:
-        logger.warn('Data saving failed. Reason: ' + str(exc))
+        logger.warning('Data saving failed. Reason: ' + str(exc))
         return strings.error_text
     else:
         logger.info('User data saved')

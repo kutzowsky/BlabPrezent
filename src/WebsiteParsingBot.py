@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pickle
 import time
 import logging
@@ -111,7 +113,7 @@ if __name__ == '__main__':
     bot = WebsiteParsingBot()
     bot.login(bot_configuration.website_login, bot_configuration.website_password)
 
-    #bot.mark_last_message_as_latest()
+    # bot.mark_last_message_as_latest()
 
     bot.start_listening()
 
