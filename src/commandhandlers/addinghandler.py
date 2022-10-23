@@ -19,7 +19,7 @@ def handle_message_content(sender, message_content):
         return handling_functions[command](sender, arguments)
     except KeyError:
         logger.info('Got unknown command')
-        return strings.help_text
+        return [(sender, strings.help_text)]
 
 
 def _handle_add(sender, user_data):
@@ -30,7 +30,7 @@ def _handle_add(sender, user_data):
         datamanager.save_user_data(sender, user_data)
     except Exception as exc:
         logger.warning('Data saving failed. Reason: ' + str(exc))
-        return strings.error_text
+        return [(sender, strings.error_text)]
     else:
         logger.info('User data saved')
-        return strings.data_saved
+        return [(sender, strings.data_saved)]

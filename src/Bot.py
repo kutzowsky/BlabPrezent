@@ -22,9 +22,10 @@ class Bot(ClientXMPP):
 
     def on_message(self, message):
         if message['type'] in ('chat', 'normal') and message["from"] == self.blabler_bot_jid:
-            answer = messagehandler.handle(message['body'])
-            if answer is not None:
-                message.reply(answer).send()
+            answers = messagehandler.handle(message['body'])
+            if answers:
+                for answer in answers:
+                    message.reply(answer).send()
 
 
 def _set_logger():

@@ -13,7 +13,7 @@ def save_user_data(username, address):
 def get_participants():
     sql_query = "SELECT user FROM Addresses"
     users_tuples = _execute_sql_query(sql_query)
-    users_strings = [ user_tuple[0] for user_tuple in users_tuples ]
+    users_strings = [user_tuple[0] for user_tuple in users_tuples]
 
     return users_strings
 
@@ -41,6 +41,16 @@ def save_send_confirmation(user, datetime):  # sqlite3.IntegrityError jak duplik
 def save_received_confirmation(user, datetime):
     sql_query = "INSERT INTO ReceivedConfirmations VALUES (?, ?)"
     _execute_sql_query(sql_query, (user, datetime))
+
+
+def get_gift_sender_for(user):
+    sql_query = "SELECT gifter from GiftAssignment where gifted LIKE ?"
+    return _execute_sql_query(sql_query, (user,)).fetchone()[0]
+
+
+def get_gift_receiver_from(user):
+    sql_query = "SELECT gifted from GiftAssignment where gifter LIKE ?"
+    return _execute_sql_query(sql_query, (user,)).fetchone()[0]
 
 
 def _execute_sql_query(query, args=None):
