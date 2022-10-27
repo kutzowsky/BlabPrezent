@@ -3,6 +3,7 @@
 import pickle
 import time
 import logging
+import os.path
 
 from wwwparsing import BlabWebsiteClient
 from config import configreader
@@ -20,11 +21,14 @@ class WebsiteParsingBot:
         self.username = username
         self.website_client.login(username, password)
 
-    def mark_last_message_as_latest(self):
-        messages = self.website_client.get_secretary_messages()
-        messages_to_bot = list(filter(lambda message: not message['text'].startswith(self.username), messages))
-        latest_message = messages_to_bot[0]
-        pickle.dump(latest_message, open(self.latest_message_file_name, 'wb'))
+    def try_create_latest_message_file(self):
+        if not os.path.exists(self.latest_message_file_name):
+            logger.warning(f"{self.latest_message_file_name} does not exist. Creating.")
+
+            messages = self.website_client.get_secretary_messages()
+            messages_to_bot = list(filter(lambda message: not message['text'].startswith(self.username), messages))
+            latest_message = messages_to_bot[0]
+            pickle.dump(latest_message, open(self.latest_message_file_name, 'wb'))
 
     def start_listening(self, sleep_seconds=60.0):
         self.logger.info(f'Listening started. Sleep timeout set to: {sleep_seconds}s')
@@ -113,7 +117,7 @@ if __name__ == '__main__':
     bot = WebsiteParsingBot()
     bot.login(bot_configuration.website_login, bot_configuration.website_password)
 
-    # bot.mark_last_message_as_latest()
+    bot.try_create_latest_message_file()
 
     bot.start_listening()
 
