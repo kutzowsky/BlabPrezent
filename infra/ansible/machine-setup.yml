@@ -1,0 +1,76 @@
+- name: Blabprezent machine setup
+  hosts: all
+  become: yes
+  vars:
+    username: bp
+    tempdir: /tmp/bpcode
+    gitrepo: https://github.com/kutzowsky/BlabPrezent.git
+  tasks:
+    - name: Install required system packages
+      register: updatesys
+      apt:
+        update_cache: yes
+        name:
+          - git
+          - python3-pip
+          - sqlite3
+          - libsqlite3-dev
+          - supervisor
+          - ntp
+        state: present
+
+    - name: Create user with a ssh key
+      user:
+        name: '{{ username }}'
+        shell: /bin/bash
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/{{ username }}_id_rsa
+
+    - name: Fetch public key
+      fetch:
+        src: '/home/{{ username }}/.ssh/{{ username }}_id_rsa.pub'
+        dest: ./
+        flat: yes
+
+    - name: Fetch private key
+      fetch:
+        src: '/home/{{ username }}/.ssh/{{ username }}_id_rsa'
+        dest: ./
+        flat: yes
+
+    - name: Add user's key to authorized_keys
+      ansible.posix.authorized_key:
+        user: '{{ username }}'
+        state: present
+        key: "{{ lookup('file', './'+username+'_id_rsa.pub') }}"
+
+    - name: Create a code directory in temp
+      file:
+        path: '{{ tempdir }}'
+        state: directory
+
+    - name: Shallow clone develop branch from Blabprezent Github repo
+      git:
+        repo: '{{ gitrepo }}'
+        dest: '{{ tempdir }}'
+        depth: 1
+        version: master 
+
+    - name: Copy code to user home directory
+      copy:
+        src: '{{ tempdir }}/src/'
+        dest: '/home/{{ username }}'
+        remote_src: yes
+        owner: '{{ username }}'
+        group: '{{ username }}'
+
+    - name: Copy supervisor config file
+      copy:
+        src: '{{ tempdir }}/infra/supervisor/blabprezent.conf'
+        dest: '/etc/supervisor/conf.d/'
+        remote_src: yes
+
+    - name: Install python requirements
+      pip:
+        requirements: '/home/{{ username }}/requirements.txt'
