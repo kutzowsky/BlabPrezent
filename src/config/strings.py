@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 help_text = 'Jestem botem o bardzo małym rozumku i nie rozumiem :(. Pomoc na: [jeszcze nie ma, bo to tylko testy]'
 data_saved = 'Zapisałem poprawnie Twoje dane. Cierpliwie czekaj na losowanie.'
@@ -11,3 +10,5 @@ received_confirmation_saved = 'Zapisałem potwierdzenie odebrania przesyłki. Dz
 confirmation_already_exists = 'Mam już potwierdzenie w bazie. Nie zapisuję go drugi raz.'
 data_gathering_disabled = 'Niestety, trochę za późno. Lista uczestników została zamknięta.'
 not_a_participant = 'Kim jesteś? Nie mam Cię na liście uczestników.'
+package_sent_notification = 'Twój prezent został wysłany.'
+package_received_notificaton = 'Prezent od Ciebie został odebrany.'

@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 
 from mock import patch
 from nose.tools import *
@@ -11,14 +9,16 @@ from config import strings
 
 
 @ddt
-class TestsAddingHandler():
+class TestsAddingHandler:
     def test_handle_message_content_should_not_throw(self):
         addinghandler.handle_message_content('user', 'content')
 
     def test_when_message_has_no_add_command_should_return_help_text(self):
-        answer = addinghandler.handle_message_content('user', 'nie dodawaj, odejmuj!')
+        user = 'someuser'
+        expected_answer = [(user, strings.help_text)]
+        answer = addinghandler.handle_message_content(user, 'nie dodawaj, odejmuj!')
 
-        assert_equal(answer, strings.help_text)
+        assert_equal(answer, expected_answer)
 
     @patch('dal.datamanager.save_user_data')
     def test_when_message_has_no_add_command_should_not_try_to_save_data(self, save_user_data):
@@ -40,17 +40,21 @@ class TestsAddingHandler():
 
     @patch('dal.datamanager.save_user_data')
     def test_when_successfully_saved_user_data_should_return_data_saved_text(self, save_user_data):
-        answer = addinghandler.handle_message_content('user', 'dodaj mnie!')
+        user = 'someuser'
+        expected_answer = [(user, strings.data_saved)]
+        answer = addinghandler.handle_message_content(user, 'dodaj mnie!')
 
-        assert_equal(answer, strings.data_saved)
+        assert_equal(answer, expected_answer)
 
     @patch('dal.datamanager.save_user_data')
     def test_when_there_is_error_with_saving_user_data_should_return_error_text(self, save_user_data):
+        user = 'someuser'
+        expected_answer = [(user, strings.error_text)]
         save_user_data.side_effect = Exception
 
-        answer = addinghandler.handle_message_content('user', 'dodaj mnie!')
+        answer = addinghandler.handle_message_content(user, 'dodaj mnie!')
 
-        assert_equal(answer, strings.error_text)
+        assert_equal(answer, expected_answer)
 
     @data(
         'DODAJ',

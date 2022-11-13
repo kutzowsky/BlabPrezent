@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 
 from ddt import ddt, data
@@ -11,7 +10,7 @@ from messaging import messagehandler
 
 
 @ddt
-class TestsMessageHandler():
+class TestsMessageHandler:
     def test_handle_should_not_throw(self):
         messagehandler.handle('some message not a massage')
 
@@ -29,9 +28,9 @@ class TestsMessageHandler():
         "someuser > bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny",
     )
     def test_when_message_is_directed_public_should_return_public_mesage_warn_text(self, message):
-        expected_answer = ">>someuser: " + strings.public_message_warn
+        expected_answer = [">>someuser: " + strings.public_message_warn]
         answer = messagehandler.handle(message)
-        assert_equal(answer, expected_answer)
+        assert_equal(list(answer), expected_answer)
 
     @data(
         "someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny",
@@ -56,10 +55,11 @@ class TestsMessageHandler():
 
     @patch('commandhandlers.addinghandler.handle_message_content')
     def test_when_message_is_directed_private_should_return_output_from_message_content_handler_as_private_message(self, handle_message_content):
-        message = "someuser >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
-        handle_message_content.return_value = 'Patataj'
-        expected_answer = '>>someuser: Patataj'
+        user = 'someuser'
+        message = f"{user} >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny"
+        handle_message_content.return_value = [(user, 'Patataj')]
+        expected_answer = ['>>someuser: Patataj']
 
         answer = messagehandler.handle(message)
 
-        assert_equal(answer, expected_answer)
+        assert_equal(list(answer), expected_answer)
