@@ -43,6 +43,11 @@ def save_received_confirmation(user, datetime):
     _execute_sql_query(sql_query, (user, datetime))
 
 
+def has_send_confirmation(user):
+    sql_query = "SELECT user from SentConfirmations where user LIKE ?"
+    return _execute_sql_query(sql_query, (user,)).fetchone() is not None
+
+
 def get_gift_sender_for(user):
     sql_query = "SELECT gifter from GiftAssignment where gifted LIKE ?"
     return _execute_sql_query(sql_query, (user,)).fetchone()[0]
