@@ -39,6 +39,11 @@
         dest: ./
         flat: yes
 
+    - name: Delete private key from server
+      ansible.builtin.file:
+        path: '/home/{{ username }}/.ssh/{{ username }}_id_rsa'
+        state: absent
+
     - name: Add user's key to authorized_keys
       ansible.posix.authorized_key:
         user: '{{ username }}'
