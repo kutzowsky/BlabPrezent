@@ -70,12 +70,21 @@ def _handle_received_confirmation(sender):
         logger.warning('Received confirmation saving failed. Reason: ' + str(exc))
         return [(sender, strings.error_text)]
     else:
-        logger.info('Sent confirmation saved')
+        logger.info('Received confirmation saved')
         gift_sender = datamanager.get_gift_sender_for(sender)
+
+        if not datamanager.has_send_confirmation(gift_sender):
+            _automatic_mark_as_send(gift_sender)
+
         return [
             (sender, strings.received_confirmation_saved),
             (gift_sender, strings.package_received_notificaton)
         ]
+
+
+def _automatic_mark_as_send(sender):
+    logger.warning(f'Marking package from {sender} as sent')
+    _handle_sent_confirmation(sender)
 
 
 def _handle_add(sender):
