@@ -1,0 +1,30 @@
+name: Run unit tests and get coverage report
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        working-directory: ./src
+        run: |  
+          python -m pip install --upgrade pip  
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: Run pytest tests
+        working-directory: ./src
+        run: |  
+          coverage run --source=. --module pytest  -v -s
+      - name: Generate Coverage Report
+        working-directory: ./src
+        run: |  
+          coverage report --show-missing
