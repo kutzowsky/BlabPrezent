@@ -206,15 +206,33 @@ def test_when_got_confirmation_from_user_not_in_participants_list_should_return_
     'wysłano',
     'Wyslano',
     'wysłaNO',
-    'OTRZYMANO',
-    'otrzymano',
+    'wyslano:',
 ])
-def test_when_command_has_different_letter_case_should_also_recognize_it(message, mocker):
+def test_when_send_command_synonym_was_provided_should_also_recognize_it(message, mocker):
     user = 'someuser'
-    mocker.patch('dal.datamanager.save_send_confirmation')
-    mocker.patch('dal.datamanager.save_received_confirmation')
-    mocker.patch('dal.datamanager.get_participants')
+    save_send_confirmation_mock = mocker.patch('dal.datamanager.save_send_confirmation')
+    get_participants_mock = mocker.patch('dal.datamanager.get_participants')
+    get_participants_mock.return_value = [user]
+    mocker.patch('dal.datamanager.get_gift_receiver_from')
 
-    answer = confirmationshandler.handle_message_content(user, message)
+    confirmationshandler.handle_message_content(user, message)
 
-    assert answer != strings.help_text
+    save_send_confirmation_mock.assert_called_once()
+
+@pytest.mark.parametrize('message', [
+    'otrzymano',
+    'OTRZYMANO',
+    'OtRzYMaNo',
+    'otrzymano:',
+])
+def test_when_received_command_synonym_was_provided_should_also_recognize_it(message, mocker):
+    user = 'someuser'
+    save_received_confirmation_mock = mocker.patch('dal.datamanager.save_received_confirmation')
+    get_participants_mock = mocker.patch('dal.datamanager.get_participants')
+    get_participants_mock.return_value = [user]
+    mocker.patch('dal.datamanager.get_gift_sender_for')
+    mocker.patch('dal.datamanager.has_send_confirmation')
+
+    confirmationshandler.handle_message_content(user, message)
+
+    save_received_confirmation_mock.assert_called_once()

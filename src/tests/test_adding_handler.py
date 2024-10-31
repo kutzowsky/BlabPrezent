@@ -60,8 +60,9 @@ def test_when_there_is_error_with_saving_user_data_should_return_error_text(mock
     'DoDaj',
     'dodaj',
     'Dodaj',
+    'dodaj:'
 ])
-def test_when_command_has_different_letter_case_should_also_recognize_it(message, mocker):
+def test_when_command_synonym_was_provided_should_also_recognize_it(message, mocker):
     user = 'someuser'
     save_user_data_mock = mocker.patch('dal.datamanager.save_user_data')
 
