@@ -123,6 +123,7 @@ def test_when_there_is_error_on_saving_sent_confirmation_should_return_error_tex
 
     assert answer == expected_answer
 
+
 @pytest.mark.freeze_time('2012-01-14 12:12')
 def test_when_message_has_received_command_should_save_received_confirmation(mocker):
     user = 'someuser'
@@ -207,6 +208,7 @@ def test_when_got_confirmation_from_user_not_in_participants_list_should_return_
     'Wyslano',
     'wysłaNO',
     'wyslano:',
+    'nadano',
 ])
 def test_when_send_command_synonym_was_provided_should_also_recognize_it(message, mocker):
     user = 'someuser'
@@ -219,11 +221,18 @@ def test_when_send_command_synonym_was_provided_should_also_recognize_it(message
 
     save_send_confirmation_mock.assert_called_once()
 
+
 @pytest.mark.parametrize('message', [
     'otrzymano',
     'OTRZYMANO',
     'OtRzYMaNo',
     'otrzymano:',
+    'odebrano',
+    'odebrane',
+    'otrzymałam',
+    'otrzymałem',
+    'otrzymalam',
+    'otrzymalem',
 ])
 def test_when_received_command_synonym_was_provided_should_also_recognize_it(message, mocker):
     user = 'someuser'
