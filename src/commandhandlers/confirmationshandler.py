@@ -13,7 +13,8 @@ logger = logging.getLogger()
 
 def handle_message_content(sender, message_content):
     handling_functions = {
-        'dodaj': _handle_add,
+        'dodaj': _handle_add_or_delete,
+        'usuń': _handle_add_or_delete,
         'wyslano': _handle_sent_confirmation,
         'wysłano': _handle_sent_confirmation,
         'nadano': _handle_sent_confirmation,
@@ -96,5 +97,5 @@ def _automatic_mark_as_send(sender):
     _handle_sent_confirmation(sender)
 
 
-def _handle_add(sender):
+def _handle_add_or_delete(sender):
     return [(sender, strings.data_gathering_disabled)]

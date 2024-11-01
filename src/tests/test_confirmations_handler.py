@@ -48,6 +48,23 @@ def test_when_message_has_add_command_should_not_try_to_save_any_confirmation(mo
     save_received_confirmation_mock.assert_not_called()
 
 
+def test_when_message_has_delete_command_should_return_data_gathering_disabled_text():
+    user = 'someuser'
+    expected_answer = [(user, strings.data_gathering_disabled)]
+
+    answer = confirmationshandler.handle_message_content(user, 'usuń')
+
+    assert answer == expected_answer
+
+
+def test_when_message_has_delete_command_should_not_try_to_delete_user(mocker):
+    delete_user_data_mock = mocker.patch('dal.datamanager.delete_user_data')
+
+    confirmationshandler.handle_message_content('user', 'usuń')
+
+    delete_user_data_mock.assert_not_called()
+
+
 @pytest.mark.parametrize('message', [
     'wyslano',
     'wysłano',

@@ -10,6 +10,11 @@ def save_user_data(username, address):
     _execute_sql_query(sql_query, (username, address))
 
 
+def delete_user_data(username):
+    sql_query = "DELETE FROM Addresses WHERE user LIKE ?"
+    _execute_sql_query(sql_query, (username,))
+
+
 def get_participants():
     sql_query = "SELECT user FROM Addresses"
     users_tuples = _execute_sql_query(sql_query)
@@ -31,6 +36,11 @@ def get_gift_assignments():
 def get_address_for(user):
     sql_query = "SELECT address FROM Addresses WHERE user LIKE ?"
     return _execute_sql_query(sql_query, (user,)).fetchone()[0]
+
+
+def is_participant(user):
+    sql_query = "SELECT address FROM Addresses WHERE user LIKE ?"
+    return _execute_sql_query(sql_query, (user,)).fetchone() is not None
 
 
 def save_send_confirmation(user, datetime):  # sqlite3.IntegrityError jak duplikat

@@ -2,6 +2,7 @@
 
 help_text = 'Jestem botem o bardzo małym rozumku i nie rozumiem :(. Pomoc na: [jeszcze nie ma, bo to tylko testy]'
 data_saved = 'Zapisałem poprawnie Twoje dane. Cierpliwie czekaj na losowanie.'
+data_deleted = 'Usunąłem Twoje dane z listy uczestników.'
 error_text = 'Oj, coś poszło nie tak. :('
 public_message_warn = "Usuń czym prędzej ostatnią wiadomość do mnie i wyślij ją jeszcze raz. Tym razem prywatnie. (>> a nie >)"
 gift_assigment_notification = "Wylosowałem Ci: ^{}. Ślij prezent na adres: {}"
