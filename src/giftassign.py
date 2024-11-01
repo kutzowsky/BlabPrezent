@@ -4,16 +4,19 @@ import random
 
 from dal import datamanager
 
-#todo otestowac jakos
-all_participants = datamanager.get_participants()
-participants_without_gift = list(all_participants)
 
-for participant in all_participants:
-    to_gift = participant
+def gift_assignment_draw():
+    all_participants = datamanager.get_participants()
+    participants_without_gift = list(all_participants)
 
-    while to_gift == participant:
-        to_gift = random.choice(participants_without_gift)
+    for sender in all_participants:
+        possible_receivers = [x for x in participants_without_gift if x != sender]
+        receiver = random.choice(possible_receivers)
 
-    print(participant, '->', to_gift)
-    datamanager.save_gift_assignment(participant, to_gift)
-    participants_without_gift.remove(to_gift)
+        print(sender, '->', receiver)
+        datamanager.save_gift_assignment(sender, receiver)
+        participants_without_gift.remove(receiver)
+
+
+if __name__ == '__main__':
+    gift_assignment_draw()
