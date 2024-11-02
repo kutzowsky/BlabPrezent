@@ -4,18 +4,18 @@ import logging
 
 from slixmpp import ClientXMPP
 
-from config import configreader
+from config import settings
 from messaging import messagehandler
 
 
 class Bot(ClientXMPP):
-    def __init__(self, bot_configuration):
-        ClientXMPP.__init__(self, bot_configuration.jid, bot_configuration.password)
+    def __init__(self, login, password, blabler_bot_jid):
+        ClientXMPP.__init__(self, login, password)
 
         self.add_event_handler("session_start", self.on_session_start)
         self.add_event_handler("message", self.on_message)
 
-        self.blabler_bot_jid = bot_configuration.blabler_bot_jid
+        self.blabler_bot_jid = blabler_bot_jid
 
     def on_session_start(self, _):
         self.send_presence()
@@ -48,8 +48,6 @@ if __name__ == '__main__':
 
     logger.info('Started')
 
-    bot_configuration = configreader.get_bot_configuration()
-
-    bot = Bot(bot_configuration)
+    bot = Bot(settings.JabberBot.jid, settings.JabberBot.password, settings.JabberBot.blabler_bot_jid)
     bot.connect()
     bot.process()

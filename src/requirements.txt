@@ -1,4 +1,5 @@
 slixmpp~=1.8.5
 mechanicalsoup~=1.3.0
+dynaconf~=3.2.6
 
 

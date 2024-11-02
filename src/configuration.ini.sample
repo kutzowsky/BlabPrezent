@@ -1,6 +1,0 @@
-[Connection]
-jid = somejid@some.server
-password = mylittlepassword
-blabler_bot_jid = blabler@blabler.pl
-website_login = someuser
-website_password = mylittlepasswordforwebsie

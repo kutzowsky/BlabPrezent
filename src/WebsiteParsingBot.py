@@ -6,7 +6,7 @@ import logging
 import os.path
 
 from wwwparsing import BlabWebsiteClient
-from config import configreader
+from config import settings
 from messaging import messagehandler
 
 
@@ -112,10 +112,8 @@ if __name__ == '__main__':
 
     logger.info('Started')
 
-    bot_configuration = configreader.get_bot_configuration()
-
     bot = WebsiteParsingBot()
-    bot.login(bot_configuration.website_login, bot_configuration.website_password)
+    bot.login(settings.WebsiteBot.login, settings.WebsiteBot.password)
 
     bot.try_create_latest_message_file()
 

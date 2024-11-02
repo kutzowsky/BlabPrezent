@@ -1,0 +1,8 @@
+[JabberBot]
+jid = "somejid@some.server"
+password = "mylittlejabberpassword"
+blabler_bot_jid = "blabler@blabler.pl"
+
+[WebsiteBot]
+login = "someuser"
+password = "mylittlepasswordforwebinferface"

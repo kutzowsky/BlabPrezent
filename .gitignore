@@ -89,4 +89,6 @@ ENV/
 .ropeproject
 /.idea
 /TestingCredentials.py
-configuration.ini
+
+# Project specific
+configuration.toml
