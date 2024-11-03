@@ -5,7 +5,7 @@ import logging
 from slixmpp import ClientXMPP
 
 from config import settings
-from messaging import messagehandler
+from messaging import MessageHandler
 
 
 class Bot(ClientXMPP):
@@ -17,12 +17,14 @@ class Bot(ClientXMPP):
 
         self.blabler_bot_jid = blabler_bot_jid
 
+        self.message_handler = MessageHandler(settings.General.participant_list_open)
+
     def on_session_start(self, _):
         self.send_presence()
 
     def on_message(self, message):
         if message['type'] in ('chat', 'normal') and message["from"] == self.blabler_bot_jid:
-            answers = messagehandler.handle(message['body'])
+            answers = self.message_handler.handle(message['body'])
             if answers:
                 for answer in answers:
                     message.reply(answer).send()

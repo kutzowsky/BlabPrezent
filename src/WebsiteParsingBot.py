@@ -7,7 +7,7 @@ import os.path
 
 from wwwparsing import BlabWebsiteClient
 from config import settings
-from messaging import messagehandler
+from messaging import MessageHandler
 
 
 class WebsiteParsingBot:
@@ -16,6 +16,7 @@ class WebsiteParsingBot:
         self.username = ''
         self.logger = logging.getLogger()
         self.latest_message_file_name = 'latest_message.p'
+        self.message_handler = MessageHandler(settings.General.participant_list_open)
 
     def login(self, username, password):
         self.username = username
@@ -84,7 +85,7 @@ class WebsiteParsingBot:
             full_text = message['text']
             self.logger.debug(f'Got message:  {full_text}')
 
-            answers = messagehandler.handle(full_text)
+            answers = self.message_handler.handle(full_text)
             if answers:
                 for answer in answers:
                     self.logger.debug(f'Sending answer:  {answer}')

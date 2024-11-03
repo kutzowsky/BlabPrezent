@@ -3,34 +3,40 @@
 import logging
 
 from . import messageparser
-from commandhandlers import addinghandler as messagecontenthandler
-# from commandhandlers import confirmationshandler as messagecontenthandler
+from commandhandlers import addinghandler, confirmationshandler
 from config import strings
 
-logger = logging.getLogger()
 
+class MessageHandler:
+    def __init__(self, participant_list_open=True):
+        self.logger = logging.getLogger()
 
-def handle(message):
-    if not messageparser.is_directed(message):
-        return None
+        if participant_list_open:
+            self.message_content_handler = addinghandler
+        else:
+            self.message_content_handler = confirmationshandler
 
-    sender = messageparser.get_sender_from(message)
-    answers = None
+    def handle(self, message):
+        if not messageparser.is_directed(message):
+            return None
 
-    if messageparser.is_directed_private(message):
-        logger.info('Directed private message: ' + message)
+        sender = messageparser.get_sender_from(message)
+        answers = None
 
-        message_content = messageparser.get_content_from(message)
-        answers = messagecontenthandler.handle_message_content(sender, message_content)
+        if messageparser.is_directed_private(message):
+            self.logger.info('Directed private message: ' + message)
 
-    if messageparser.is_directed_public(message):
-        logger.debug('Directed public message: ' + message)
-        logger.debug('Sending warning')
-        answers = [(sender, strings.public_message_warn)]
+            message_content = messageparser.get_content_from(message)
+            answers = self.message_content_handler.handle_message_content(sender, message_content)
 
-    answers_text = map(_create_private_message_text, answers)
-    return answers_text
+        if messageparser.is_directed_public(message):
+            self.logger.debug('Directed public message: ' + message)
+            self.logger.debug('Sending warning')
+            answers = [(sender, strings.public_message_warn)]
 
+        answers_text = map(self._create_private_message_text, answers)
+        return answers_text
 
-def _create_private_message_text(message_tuple):
-    return ">>{}: {}".format(message_tuple[0], message_tuple[1])
+    @staticmethod
+    def _create_private_message_text(message_tuple):
+        return ">>{}: {}".format(message_tuple[0], message_tuple[1])

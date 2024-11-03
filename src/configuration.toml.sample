@@ -1,3 +1,6 @@
+[General]
+participant_list_open = true
+
 [JabberBot]
 jid = "somejid@some.server"
 password = "mylittlejabberpassword"
