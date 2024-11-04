@@ -16,7 +16,7 @@ class WebsiteParsingBot:
         self.website_client = BlabWebsiteClient()
         self.username = ''
         self.logger = logging.getLogger()
-        self.latest_message_file_name = 'latest_message.p'
+        self.latest_message_file_name = 'message_checkpoint.pickle'
         self.message_handler = MessageHandler(settings.General.participant_list_open)
 
     def login(self, username, password):

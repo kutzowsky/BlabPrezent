@@ -2,7 +2,7 @@
 
 import mechanicalsoup
 
-from .MarkupParser import MarkupParser
+from src.wwwparsing.MarkupParser import MarkupParser
 
 
 class BlabWebsiteClient:

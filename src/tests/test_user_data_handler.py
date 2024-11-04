@@ -1,16 +1,16 @@
 import pytest
 
-from src.commandhandlers import addinghandler
+from src.commandhandlers import userdatahandler
 from src.config import strings
 
 def test_handle_message_content_should_not_throw():
-    addinghandler.handle_message_content('user', 'content')
+    userdatahandler.handle_message_content('user', 'content')
 
 
 def test_when_message_has_unknown_command_should_return_help_text():
     user = 'someuser'
     expected_answer = [(user, strings.help_text)]
-    answer = addinghandler.handle_message_content(user, 'nie dodawaj, odejmuj!')
+    answer = userdatahandler.handle_message_content(user, 'nie dodawaj, odejmuj!')
 
     assert answer == expected_answer
 
@@ -18,7 +18,7 @@ def test_when_message_has_unknown_command_should_return_help_text():
 def test_when_message_has_unknown_command_should_not_try_to_save_data(mocker):
     save_user_data_mock = mocker.patch('src.dal.datamanager.save_user_data')
 
-    addinghandler.handle_message_content('user', 'nie dodawaj, odejmuj!')
+    userdatahandler.handle_message_content('user', 'nie dodawaj, odejmuj!')
 
     save_user_data_mock.assert_not_called()
 
@@ -29,7 +29,7 @@ def test_when_message_has_add_command_should_try_to_save_data(mocker):
     message = f'dodaj {address}'
     save_user_data_mock = mocker.patch('src.dal.datamanager.save_user_data')
 
-    addinghandler.handle_message_content(user, message)
+    userdatahandler.handle_message_content(user, message)
 
     save_user_data_mock.assert_called_once_with(user, address)
 
@@ -39,7 +39,7 @@ def test_when_successfully_saved_user_data_should_return_data_saved_text(mocker)
     expected_answer = [(user, strings.data_saved)]
     mocker.patch('src.dal.datamanager.save_user_data')
 
-    answer = addinghandler.handle_message_content(user, 'dodaj mnie!')
+    answer = userdatahandler.handle_message_content(user, 'dodaj mnie!')
 
     assert answer == expected_answer
 
@@ -50,7 +50,7 @@ def test_when_there_is_error_with_saving_user_data_should_return_error_text(mock
     save_user_data_mock = mocker.patch('src.dal.datamanager.save_user_data')
     save_user_data_mock.side_effect = Exception
 
-    answer = addinghandler.handle_message_content(user, 'dodaj mnie!')
+    answer = userdatahandler.handle_message_content(user, 'dodaj mnie!')
 
     assert answer == expected_answer
 
@@ -66,7 +66,7 @@ def test_when_command_synonym_was_provided_should_also_recognize_it(message, moc
     user = 'someuser'
     save_user_data_mock = mocker.patch('src.dal.datamanager.save_user_data')
 
-    addinghandler.handle_message_content(user, message)
+    userdatahandler.handle_message_content(user, message)
 
     save_user_data_mock.assert_called_once()
 
@@ -78,7 +78,7 @@ def test_when_message_has_delete_command_should_try_to_delete_user_data(mocker):
     is_participant_mock = mocker.patch('src.dal.datamanager.is_participant')
     is_participant_mock.return_value = True
 
-    addinghandler.handle_message_content(user, message)
+    userdatahandler.handle_message_content(user, message)
 
     delete_user_data_mock.assert_called_once_with(user)
 
@@ -91,7 +91,7 @@ def test_when_successfully_deleted_user_data_should_return_data_deleted_text(moc
     is_participant_mock = mocker.patch('src.dal.datamanager.is_participant')
     is_participant_mock.return_value = True
 
-    answer = addinghandler.handle_message_content(user, message)
+    answer = userdatahandler.handle_message_content(user, message)
 
     assert answer == expected_answer
 
@@ -105,7 +105,7 @@ def test_when_there_is_error_with_deleting_user_data_should_return_error_text(mo
     is_participant_mock = mocker.patch('src.dal.datamanager.is_participant')
     is_participant_mock.return_value = True
 
-    answer = addinghandler.handle_message_content(user, message)
+    answer = userdatahandler.handle_message_content(user, message)
 
     assert answer == expected_answer
 
@@ -118,7 +118,7 @@ def test_when_unknown_user_sends_delete_command_should_not_try_to_delete_data_an
     is_participant_mock = mocker.patch('src.dal.datamanager.is_participant')
     is_participant_mock.return_value = False
 
-    answer = addinghandler.handle_message_content(user, message)
+    answer = userdatahandler.handle_message_content(user, message)
 
     assert answer == expected_answer
     delete_user_data_mock.assert_not_called()

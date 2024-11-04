@@ -30,7 +30,7 @@ class GiftAssignmentSender:
             gift_sender = gift_assignment[0]
             gift_receiver = gift_assignment[1]
             user_address = datamanager.get_address_for(gift_receiver)
-            gift_assignment_notification = strings.gift_assigment_notification.format(gift_receiver, user_address)
+            gift_assignment_notification = strings.gift_assignment_notification.format(gift_receiver, user_address)
             message = ">>{}: {}".format(gift_sender, gift_assignment_notification)
             logging.info('Sending to {} info about {}'.format(gift_sender, gift_receiver))
             logging.debug(message)

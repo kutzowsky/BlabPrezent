@@ -3,7 +3,7 @@
 import logging
 
 from . import messageparser
-from src.commandhandlers import addinghandler, confirmationshandler
+from src.commandhandlers import userdatahandler, confirmationshandler
 from src.config import strings
 
 
@@ -12,7 +12,7 @@ class MessageHandler:
         self.logger = logging.getLogger()
 
         if participant_list_open:
-            self.message_content_handler = addinghandler
+            self.message_content_handler = userdatahandler
         else:
             self.message_content_handler = confirmationshandler
 
