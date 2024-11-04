@@ -8,6 +8,7 @@ from config import strings
 from dal import datamanager
 from messaging import messageparser
 
+
 logger = logging.getLogger()
 
 

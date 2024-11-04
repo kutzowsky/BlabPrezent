@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import sqlite3
+from src.config import settings
 
-_DBNAME = 'blabprezent.db'
+
+_DB_DUMP_FILE = 'db_schema.sql'
 
 
 def save_user_data(username, address):
@@ -43,7 +45,7 @@ def is_participant(user):
     return _execute_sql_query(sql_query, (user,)).fetchone() is not None
 
 
-def save_send_confirmation(user, datetime):  # sqlite3.IntegrityError jak duplikat
+def save_send_confirmation(user, datetime):
     sql_query = "INSERT INTO SentConfirmations VALUES (?, ?)"
     _execute_sql_query(sql_query, (user, datetime))
 
@@ -68,8 +70,18 @@ def get_gift_receiver_from(user):
     return _execute_sql_query(sql_query, (user,)).fetchone()[0]
 
 
+def create_db():
+    connection = sqlite3.connect(settings.General.database_file)
+
+    with open(_DB_DUMP_FILE, 'r') as sql_file:
+        sql_content = sql_file.read()
+        with connection:
+            cursor = connection.cursor()
+            cursor.executescript(sql_content)
+
+
 def _execute_sql_query(query, args=None):
-    connection = sqlite3.connect(_DBNAME)
+    connection = sqlite3.connect(settings.General.database_file)
 
     with connection:
         cursor = connection.cursor()

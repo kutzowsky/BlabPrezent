@@ -1,5 +1,6 @@
 [General]
 participant_list_open = true
+database_file = "blabprezent.db"
 
 [JabberBot]
 jid = "somejid@some.server"

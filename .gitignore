@@ -92,3 +92,4 @@ ENV/
 
 # Project specific
 configuration.toml
+blabprezent.db

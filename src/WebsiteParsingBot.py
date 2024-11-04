@@ -8,6 +8,7 @@ import os.path
 from wwwparsing import BlabWebsiteClient
 from config import settings
 from messaging import MessageHandler
+from dal import datamanager
 
 
 class WebsiteParsingBot:
@@ -108,10 +109,18 @@ def _set_logger():
     logger.addHandler(console_handler)
 
 
+def create_db_if_not_exist():
+    if not os.path.exists(settings.General.database_file):
+        logger.info(f'Database file does not exist. Creating.')
+        datamanager.create_db()
+
+
 if __name__ == '__main__':
     _set_logger()
 
     logger.info('Started')
+
+    create_db_if_not_exist()
 
     bot = WebsiteParsingBot()
     bot.login(settings.WebsiteBot.login, settings.WebsiteBot.password)
