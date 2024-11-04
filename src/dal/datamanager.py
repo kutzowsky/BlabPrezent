@@ -25,13 +25,13 @@ def get_participants():
     return users_strings
 
 
-def save_gift_assignment(gifter, gifted):
-    sql_query = "INSERT INTO GiftAssignment VALUES (?, ?)"
-    _execute_sql_query(sql_query, (gifter, gifted))
+def save_gift_assignment(sender, receiver):
+    sql_query = "INSERT INTO Gifts (sender, receiver) VALUES (?, ?)"
+    _execute_sql_query(sql_query, (sender, receiver))
 
 
 def get_gift_assignments():
-    sql_query = "SELECT gifter, gifted FROM GiftAssignment"
+    sql_query = "SELECT sender, receiver FROM Gifts"
     return _execute_sql_query(sql_query)
 
 
@@ -46,27 +46,27 @@ def is_participant(user):
 
 
 def save_send_confirmation(user, datetime):
-    sql_query = "INSERT INTO SentConfirmations VALUES (?, ?)"
-    _execute_sql_query(sql_query, (user, datetime))
+    sql_query = "UPDATE Gifts SET sent=? WHERE sender=?"
+    _execute_sql_query(sql_query, (datetime, user))
 
 
 def save_received_confirmation(user, datetime):
-    sql_query = "INSERT INTO ReceivedConfirmations VALUES (?, ?)"
-    _execute_sql_query(sql_query, (user, datetime))
+    sql_query = "UPDATE Gifts SET Received=? WHERE Receiver=?"
+    _execute_sql_query(sql_query, (datetime, user))
 
 
 def has_send_confirmation(user):
-    sql_query = "SELECT user from SentConfirmations where user LIKE ?"
+    sql_query = "SELECT sender from Gifts WHERE sender LIKE ?"
     return _execute_sql_query(sql_query, (user,)).fetchone() is not None
 
 
 def get_gift_sender_for(user):
-    sql_query = "SELECT gifter from GiftAssignment where gifted LIKE ?"
+    sql_query = "SELECT sender from Gifts WHERE receiver LIKE ?"
     return _execute_sql_query(sql_query, (user,)).fetchone()[0]
 
 
 def get_gift_receiver_from(user):
-    sql_query = "SELECT gifted from GiftAssignment where gifter LIKE ?"
+    sql_query = "SELECT receiver from Gifts WHERE sender LIKE ?"
     return _execute_sql_query(sql_query, (user,)).fetchone()[0]
 
 
