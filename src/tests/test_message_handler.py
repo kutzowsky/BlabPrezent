@@ -1,7 +1,7 @@
 import pytest
 
-from config import strings
-from messaging import MessageHandler
+from src.config import strings
+from src.messaging import MessageHandler
 
 
 def test_handle_should_not_throw():
@@ -38,7 +38,7 @@ def test_when_message_is_directed_public_should_return_public_message_warn_text(
 ])
 def test_when_message_is_directed_private_should_call_message_content_handler(message, mocker):
     messagehandler = MessageHandler()
-    handle_message_content_mock = mocker.patch('commandhandlers.addinghandler.handle_message_content')
+    handle_message_content_mock = mocker.patch('src.commandhandlers.addinghandler.handle_message_content')
 
     messagehandler.handle(message)
 
@@ -50,7 +50,7 @@ def test_when_message_is_directed_private_should_call_message_content_handler_wi
     message_text = 'dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
     raw_message = f'{username} >> bot: {message_text}'
     messagehandler = MessageHandler()
-    handle_message_content_mock = mocker.patch('commandhandlers.addinghandler.handle_message_content')
+    handle_message_content_mock = mocker.patch('src.commandhandlers.addinghandler.handle_message_content')
 
     messagehandler.handle(raw_message)
 
@@ -61,7 +61,7 @@ def test_when_message_is_directed_private_should_return_output_from_message_cont
     user = 'someuser'
     raw_message = f'{user} >> bot: dodaj Jan Kowalski, Winogronowa 123/3, Pcim Dolny'
     messagehandler = MessageHandler()
-    handle_message_content_mock = mocker.patch('commandhandlers.addinghandler.handle_message_content')
+    handle_message_content_mock = mocker.patch('src.commandhandlers.addinghandler.handle_message_content')
     handle_message_content_mock.return_value = [(user, 'Patataj')]
     expected_answer = ['>>someuser: Patataj']
 

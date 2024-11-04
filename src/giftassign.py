@@ -2,7 +2,7 @@
 
 import random
 
-from dal import datamanager
+from src.dal import datamanager
 
 
 def gift_assignment_draw():

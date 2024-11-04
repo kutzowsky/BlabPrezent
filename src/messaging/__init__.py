@@ -1,1 +1,1 @@
-from .messagehandler import MessageHandler
+from src.messaging.messagehandler import MessageHandler

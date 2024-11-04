@@ -1,1 +1,1 @@
-from .BlabWebsiteClient import BlabWebsiteClient
+from src.wwwparsing.BlabWebsiteClient import BlabWebsiteClient

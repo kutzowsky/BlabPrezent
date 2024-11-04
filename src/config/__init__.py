@@ -1,1 +1,1 @@
-from .configuration import *
+from src.config.configuration import *

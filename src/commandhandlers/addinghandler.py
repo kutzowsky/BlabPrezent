@@ -2,9 +2,9 @@
 
 import logging
 
-from config import strings
-from dal import datamanager
-from messaging import messageparser
+from src.config import strings
+from src.dal import datamanager
+from src.messaging import messageparser
 
 
 logger = logging.getLogger()

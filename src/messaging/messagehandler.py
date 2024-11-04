@@ -3,8 +3,8 @@
 import logging
 
 from . import messageparser
-from commandhandlers import addinghandler, confirmationshandler
-from config import strings
+from src.commandhandlers import addinghandler, confirmationshandler
+from src.config import strings
 
 
 class MessageHandler:

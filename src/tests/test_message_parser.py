@@ -1,6 +1,6 @@
 import pytest
 
-from messaging import messageparser
+from src.messaging import messageparser
 
 
 @pytest.mark.parametrize('message', [
