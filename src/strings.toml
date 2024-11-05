@@ -11,3 +11,4 @@ data_gathering_disabled = "Niestety, trochę za późno. Lista uczestników zost
 not_a_participant = "Kim jesteś? Nie mam Cię na liście uczestników."
 package_sent_notification = "Twój prezent został wysłany."
 package_received_notificaton = "Prezent od Ciebie został odebrany."
+tracking_url_text = "Link do śledzenia"

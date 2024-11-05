@@ -2,6 +2,7 @@
 
 import datetime
 import logging
+from urllib.parse import urlparse
 from sqlite3 import IntegrityError
 
 from src.config import strings
@@ -29,15 +30,16 @@ def handle_message_content(sender, message_content):
     }
 
     command = messageparser.get_command_from(message_content).lower()
+    arguments = messageparser.remove_command_from(message_content)
 
     try:
-        return handling_functions[command](sender)
+        return handling_functions[command](sender, arguments)
     except KeyError:
         logger.info('Got unknown command')
         return [(sender, strings.help_text)]
 
 
-def _handle_sent_confirmation(sender):
+def _handle_sent_confirmation(sender, arguments=None):
     logger.info('Got sent confirmation')
 
     try:
@@ -47,7 +49,17 @@ def _handle_sent_confirmation(sender):
         if sender not in participants:
             return [(sender, strings.not_a_participant)]
 
-        datamanager.save_send_confirmation(sender, datetime.datetime.now())
+        tracking_url = None
+        if arguments:
+            logger.debug('Confirmation has parameter')
+            if _is_url(arguments):
+                tracking_url = arguments
+                logger.debug('Tracking URL detected: ' + tracking_url)
+            else:
+                logger.warning('Confirmation parameter is not valid URL: ' + arguments)
+
+        datamanager.save_send_confirmation(sender, datetime.datetime.now(), tracking_url)
+
     except IntegrityError:
         logger.warning('Duplicated sent confirmation')
         return [(sender, strings.confirmation_already_exists)]
@@ -57,13 +69,18 @@ def _handle_sent_confirmation(sender):
     else:
         logger.info('Sent confirmation saved')
         gift_receiver = datamanager.get_gift_receiver_from(sender)
-        return [
+        answers = [
             (sender, strings.sent_confirmation_saved),
             (gift_receiver, strings.package_sent_notification),
         ]
 
+        if tracking_url:
+            answers.append((gift_receiver, f"{strings.tracking_url_text}: {tracking_url}"))
 
-def _handle_received_confirmation(sender):
+        return answers
+
+
+def _handle_received_confirmation(sender, _):
     logger.info('Got received confirmation')
 
     try:
@@ -93,10 +110,18 @@ def _handle_received_confirmation(sender):
         ]
 
 
+def _handle_add_or_delete(sender, _):
+    return [(sender, strings.data_gathering_disabled)]
+
+
 def _automatic_mark_as_send(sender):
     logger.warning(f'Marking package from {sender} as sent')
     _handle_sent_confirmation(sender)
 
 
-def _handle_add_or_delete(sender):
-    return [(sender, strings.data_gathering_disabled)]
+def _is_url(text):
+    result = urlparse(text)
+    if result.scheme and result.netloc:
+        return True
+    else:
+        return False

@@ -45,9 +45,13 @@ def is_participant(user):
     return _execute_sql_query(sql_query, (user,)).fetchone() is not None
 
 
-def save_send_confirmation(user, datetime):
-    sql_query = "UPDATE Gifts SET sent=? WHERE sender=?"
-    _execute_sql_query(sql_query, (datetime, user))
+def save_send_confirmation(user, datetime, tracking_url=None):
+    if tracking_url:
+        sql_query = "UPDATE Gifts SET sent=?, url=? WHERE sender=?"
+        _execute_sql_query(sql_query, (datetime, tracking_url, user))
+    else:
+        sql_query = "UPDATE Gifts SET sent=? WHERE sender=?"
+        _execute_sql_query(sql_query, (datetime, user))
 
 
 def save_received_confirmation(user, datetime):

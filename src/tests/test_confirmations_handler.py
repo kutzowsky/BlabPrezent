@@ -82,7 +82,7 @@ def test_when_message_has_sent_command_should_save_send_confirmation(message, mo
 
     confirmationshandler.handle_message_content(user, message)
 
-    save_send_confirmation_mock.assert_called_once_with(user, expected_datetime)
+    save_send_confirmation_mock.assert_called_once_with(user, expected_datetime, None)
 
 
 @pytest.mark.parametrize('message', [
@@ -135,6 +135,81 @@ def test_when_there_is_error_on_saving_sent_confirmation_should_return_error_tex
     save_send_confirmation_mock.side_effect = Exception
     get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
     get_participants_mock.return_value = [user]
+
+    answer = confirmationshandler.handle_message_content(user, message)
+
+    assert answer == expected_answer
+
+
+@pytest.mark.freeze_time('2012-01-14 12:12')
+def test_when_message_has_sent_command_with_valid_tracking_url_should_save_confirmation_with_url(mocker):
+    url = 'http://www.paczkowisko.com.pl/tracking/9308490i9ACB333'
+    message = f'wyslano {url}'
+    user = 'someuser'
+    expected_datetime = datetime.datetime(2012, 1, 14, 12, 12)
+
+    get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
+    mocker.patch('src.dal.datamanager.get_gift_receiver_from')
+    get_participants_mock.return_value = [user]
+
+    save_send_confirmation_mock = mocker.patch('src.dal.datamanager.save_send_confirmation')
+
+    confirmationshandler.handle_message_content(user, message)
+
+    save_send_confirmation_mock.assert_called_once_with(user, expected_datetime, url)
+
+
+@pytest.mark.freeze_time('2012-01-14 12:12')
+def test_when_message_has_sent_command_with_invalid_url_should_save_only_confirmation_entry(mocker):
+    message = f'wyslano blablabla'
+    user = 'someuser'
+    expected_datetime = datetime.datetime(2012, 1, 14, 12, 12)
+
+    get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
+    mocker.patch('src.dal.datamanager.get_gift_receiver_from')
+    get_participants_mock.return_value = [user]
+
+    save_send_confirmation_mock = mocker.patch('src.dal.datamanager.save_send_confirmation')
+
+    confirmationshandler.handle_message_content(user, message)
+
+    save_send_confirmation_mock.assert_called_once_with(user, expected_datetime, None)
+
+
+def test_when_successfully_saved_sent_confirmation_with_valid_tracking_url_should_also_send_it_to_the_receiver(mocker):
+    url = 'http://www.paczkowisko.com.pl/tracking/9308490i9ACB333'
+    message = f'wyslano {url}'
+    user = 'someuser'
+    gift_receiver = 'gift_receiver'
+    expected_answer = [
+        (user, strings.sent_confirmation_saved),
+        (gift_receiver, strings.package_sent_notification),
+        (gift_receiver, f"{strings.tracking_url_text}: {url}")
+    ]
+    get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
+    get_participants_mock.return_value = [user]
+    mocker.patch('src.dal.datamanager.save_send_confirmation')
+    gift_receiver_from_mock = mocker.patch('src.dal.datamanager.get_gift_receiver_from')
+    gift_receiver_from_mock.return_value = gift_receiver
+
+    answer = confirmationshandler.handle_message_content(user, message)
+
+    assert answer == expected_answer
+
+
+def test_confirmation_entry_has_invalid_url_should_not_send_it_to_the_receiver(mocker):
+    message = f'wyslano cośtamcoś aaaa!'
+    user = 'someuser'
+    gift_receiver = 'gift_receiver'
+    expected_answer = [
+        (user, strings.sent_confirmation_saved),
+        (gift_receiver, strings.package_sent_notification),
+    ]
+    get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
+    get_participants_mock.return_value = [user]
+    mocker.patch('src.dal.datamanager.save_send_confirmation')
+    gift_receiver_from_mock = mocker.patch('src.dal.datamanager.get_gift_receiver_from')
+    gift_receiver_from_mock.return_value = gift_receiver
 
     answer = confirmationshandler.handle_message_content(user, message)
 

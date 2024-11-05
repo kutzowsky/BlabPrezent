@@ -9,7 +9,8 @@ CREATE TABLE Gifts (
     sender VARCHAR (30) REFERENCES Addresses (user) NOT NULL UNIQUE,
     receiver VARCHAR (30) REFERENCES Addresses (user) NOT NULL UNIQUE,
     sent DATETIME,
-    received DATETIME
+    received DATETIME,
+    url VARCHAR (160)
 );
 
 COMMIT;
