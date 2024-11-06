@@ -16,7 +16,3 @@ def gift_assignment_draw():
         print(sender, '->', receiver)
         datamanager.save_gift_assignment(sender, receiver)
         participants_without_gift.remove(receiver)
-
-
-if __name__ == '__main__':
-    gift_assignment_draw()

@@ -5,10 +5,9 @@ import time
 import logging
 import os.path
 
-from wwwparsing import BlabWebsiteClient
-from config import settings
-from messaging import MessageHandler
-from dal import datamanager
+from src.wwwparsing import BlabWebsiteClient
+from src.config import settings
+from src.messaging import MessageHandler
 
 
 class WebsiteParsingBot:
@@ -16,7 +15,7 @@ class WebsiteParsingBot:
         self.website_client = BlabWebsiteClient()
         self.username = ''
         self.logger = logging.getLogger()
-        self.latest_message_file_name = 'message_checkpoint.pickle'
+        self.checkpoint_file_path = 'message_checkpoint.pickle'
         self.message_handler = MessageHandler(settings.General.participant_list_open)
 
     def login(self, username, password):
@@ -24,13 +23,13 @@ class WebsiteParsingBot:
         self.website_client.login(username, password)
 
     def try_create_latest_message_file(self):
-        if not os.path.exists(self.latest_message_file_name):
-            logger.warning(f"{self.latest_message_file_name} does not exist. Creating.")
+        if not os.path.exists(self.checkpoint_file_path):
+            logging.info(f"{self.checkpoint_file_path} does not exist. Creating.")
 
             messages = self.website_client.get_secretary_messages()
             messages_to_bot = list(filter(lambda message: not message['text'].startswith(self.username), messages))
             latest_message = messages_to_bot[0]
-            pickle.dump(latest_message, open(self.latest_message_file_name, 'wb'))
+            pickle.dump(latest_message, open(self.checkpoint_file_path, 'wb'))
 
     def start_listening(self, sleep_seconds=60.0):
         self.logger.info(f'Listening started. Sleep timeout set to: {sleep_seconds}s')
@@ -49,7 +48,7 @@ class WebsiteParsingBot:
         self.website_client.send_message(message_text)
 
     def _get_new_messages(self):
-        previous_latest_message = pickle.load(open(self.latest_message_file_name, 'rb'))
+        previous_latest_message = pickle.load(open(self.checkpoint_file_path, 'rb'))
 
         messages_to_bot = self._get_messages_newer_than(previous_latest_message)
 
@@ -60,7 +59,7 @@ class WebsiteParsingBot:
         self.logger.info(f'New messages: {len(messages_to_bot)}')
 
         latest_message = messages_to_bot[0]
-        pickle.dump(latest_message, open(self.latest_message_file_name, "wb"))
+        pickle.dump(latest_message, open(self.checkpoint_file_path, "wb"))
 
         return messages_to_bot
 
@@ -92,40 +91,3 @@ class WebsiteParsingBot:
                     self.logger.debug(f'Sending answer:  {answer}')
                     self._send_message(answer)
                     time.sleep(1)  # small delay just in case to keep message spam protection happy
-
-
-def _set_logger():
-    global logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    file_handler = logging.FileHandler('bot.log')
-    file_handler.setLevel(logging.DEBUG)
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(formatter)
-    console_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
-
-
-def create_db_if_not_exist():
-    if not os.path.exists(settings.General.database_file):
-        logger.info(f'Database file does not exist. Creating.')
-        datamanager.create_db()
-
-
-if __name__ == '__main__':
-    _set_logger()
-
-    logger.info('Started')
-
-    create_db_if_not_exist()
-
-    bot = WebsiteParsingBot()
-    bot.login(settings.WebsiteBot.login, settings.WebsiteBot.password)
-
-    bot.try_create_latest_message_file()
-
-    bot.start_listening()
-

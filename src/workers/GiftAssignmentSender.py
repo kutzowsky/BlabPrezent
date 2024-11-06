@@ -5,9 +5,9 @@ import time
 
 from slixmpp import ClientXMPP
 
-from config import settings, strings
-from dal import datamanager
-from wwwparsing import BlabWebsiteClient
+from src.config import settings, strings
+from src.dal import datamanager
+from src.wwwparsing import BlabWebsiteClient
 
 
 class GiftAssignmentSender:
@@ -59,27 +59,3 @@ class GiftAssignmentSenderWWW:
 
     def send_assignment(self, text):
         self.website_client.send_message(text)
-
-
-def _set_logger():
-    global logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    file_handler = logging.FileHandler('bot.log')
-    file_handler.setLevel(logging.DEBUG)
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(formatter)
-    console_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
-
-
-if __name__ == '__main__':
-    _set_logger()
-
-    logger.info('Started')
-
-    sender = GiftAssignmentSender(mode='www')
-    sender.send_assignments()

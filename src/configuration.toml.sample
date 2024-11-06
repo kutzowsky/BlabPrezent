@@ -1,4 +1,5 @@
 [General]
+mode = "www"    # or xmpp
 participant_list_open = true
 database_file = "blabprezent.db"
 
