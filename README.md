@@ -2,17 +2,34 @@
 Bot obsługujący loterię prezentową w pewnym serwisie mikroblogowym.
 
 ## Ogólne zasady loterii
-Zasady zbliżone są do szkolnej loterii mikołajkowej.
+Zasady zbliżone są do szkolnej loterii mikołajkowej:
+1. Chętni zgłaszają się do zabawy pisząc odpowiednią wiadomośc do bota.
+2. Drugą fazą jest losowanie kto komu kupuje prezent.
+3. Powiadomienie uczestników o wynikach losowania.
+4. Uczestnicy potwierdzają wysłanie/odebranie przesyłki pisząc odpowiednią wiadomośc do bota.
+5. Olbrzymia radość z otrzymanych prezentów.
 
-1. Chętni zgłaszają się do zabawy pisząc odpowiednią wiadomośc do bota (`Bot.py` w trybie zbierania danych).
-2. Drugą fazą jest losowanie kto komu kupuje prezent (`giftassign.py`).
-3. Powiadomienie uczestników o wynikach losowania (`GiftAssignmentSender.py`).
-4. Uczestnicy potwierdzają wysłanie/odebranie przesyłki pisząc odpowiednią wiadomośc do bota. (`Bot.py` w trybie zbierania potwierdzeń).
+## Jak uruchomić?
 
-## Trochę więcej szczegółów
-* **Język:** Python 3
-* **Zależności:** patrz `requirements.txt`,
-* **Zasada działania:** bot XMPP parsujący wiadomości od bota mikroblogowego, zapisujący dane w bazie SQLite i wysyłający odpowiednie odpowiedzi.
+### Program
+Źródła są w katalogu `src`: `cd src`
 
-## Chcę pomóc!
-Świetnie. Zawsze przyda się więcej chęci, refactoringu, testów, ficzerów, owsa, marchewki i podobnych. Patrz w issues, rób pull requesty i kontaktuj się ze mną.
+`pip install -r requirements.txt`
+
+Na podstawie `configuration.toml.sample` stworzyć `configuration.toml`
+
+Uruchomić `bp.py` z odpowiednim parametrem, np `python bp.py bot`
+
+### Testy
+`cd src`
+
+`pip install -r requirements-dev.txt`
+
+`pytest`
+
+
+## Więcej informacji
+* **Język:** Python,
+* **Główne zależności:** [SQLite](https://www.sqlite.org), [Dynaconf](https://www.dynaconf.com), [slixmpp](https://slixmpp.readthedocs.io/en/latest/), [mechanicalsoup](https://mechanicalsoup.readthedocs.io/en/stable/),
+* **Testy**: [pytest](https://docs.pytest.org/en/stable/)
+* **Więcej** w [wiki](https://github.com/kutzowsky/BlabPrezent/wiki).
