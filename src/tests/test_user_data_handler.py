@@ -3,6 +3,7 @@ import pytest
 from src.commandhandlers import userdatahandler
 from src.config import strings
 
+
 def test_handle_message_content_should_not_throw():
     userdatahandler.handle_message_content('user', 'content')
 

@@ -45,8 +45,7 @@ def _handle_sent_confirmation(sender, arguments=None):
     try:
         logger.info('Trying to save sent confirmation for user: ' + sender)
 
-        participants = datamanager.get_participants()
-        if sender not in participants:
+        if not datamanager.is_participant(sender):
             return [(sender, strings.not_a_participant)]
 
         tracking_url = None
@@ -86,8 +85,7 @@ def _handle_received_confirmation(sender, _):
     try:
         logger.info('Trying to save received confirmation for user: ' + sender)
 
-        participants = datamanager.get_participants()
-        if sender not in participants:
+        if not datamanager.is_participant(sender):
             return [(sender, strings.not_a_participant)]
 
         datamanager.save_received_confirmation(sender, datetime.datetime.now())
