@@ -5,7 +5,7 @@ from unittest.mock import call
 def test_gift_assignment_draw_should_not_throw(mocker):
     random_choice_mock = mocker.patch('random.choice')
     random_choice_mock.side_effect = lambda x: x[0]
-    mocker.patch('src.dal.datamanager.get_participants')
+    mocker.patch('src.dal.datamanager.get_all_participants')
 
     giftdraw.gift_assignment_draw()
 
@@ -14,7 +14,7 @@ def test_gift_assignment_draw_should_save_gift_assignment_for_all_participants(m
     participants = ['misia', 'bela', 'kasia', 'konfacela']
     random_choice_mock = mocker.patch('random.choice')
     random_choice_mock.side_effect = lambda x: x[0]
-    get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
+    get_participants_mock = mocker.patch('src.dal.datamanager.get_all_participants')
     get_participants_mock.return_value = participants
     save_gift_assignment_mock = mocker.patch('src.dal.datamanager.save_gift_assignment')
 
@@ -34,7 +34,7 @@ def test_gift_assignment_draw_should_(mocker):
     ]
     random_choice_mock = mocker.patch('random.choice')
     random_choice_mock.side_effect = lambda x: x[0]
-    get_participants_mock = mocker.patch('src.dal.datamanager.get_participants')
+    get_participants_mock = mocker.patch('src.dal.datamanager.get_all_participants')
     get_participants_mock.return_value = participants
     save_gift_assignment_mock = mocker.patch('src.dal.datamanager.save_gift_assignment')
 
