@@ -80,7 +80,7 @@ def save_received_confirmation(user, datetime):
 
 
 def has_send_confirmation(user):
-    sql_query = "SELECT sender from Gifts WHERE sender LIKE ?"
+    sql_query = "SELECT sender from Gifts WHERE sender LIKE ? AND sent IS NOT NULL"
     return _execute_sql_query(sql_query, (user,)).fetchone() is not None
 
 
