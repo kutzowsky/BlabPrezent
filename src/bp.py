@@ -58,14 +58,47 @@ def action_send_assignments():
     sender.send_assignments()
 
 
-def run_action_from_arguments():
-    parser = argparse.ArgumentParser(description='Blabprezent CLI')
+def action_status_users():
+    user_data = datamanager.get_all_addresses()
+    print(f'Uczestników: {len(user_data)}')
+    for user_entry in user_data:
+        print(f'{user_entry[0]: <13}{user_entry[1]}')
 
-    parser.add_argument(
-        'mode',
-        choices=['bot', 'draw', 'send-assignments'],
-        help='Mode of operation'
-    )
+
+def action_status_gifts():
+    packages = datamanager.get_all_not_sent_packages()
+    print(f'Niewysłane: {len(packages)}')
+    for package in packages:
+        print(f'{package[0]}->{package[1]}')
+    print()
+
+    packages = datamanager.get_all_sent_packages()
+    print(f'W drodze: {len(packages)}')
+    for package in packages:
+        print(f'{package[0]}->{package[1]: <13}{package[2]} {package[3] or ''}')
+    print()
+
+    packages = datamanager.get_all_received_packages()
+    print(f'Odebrane: {len(packages)}')
+    for package in packages:
+        print(f'{package[0]}->{package[1]: <13}{package[2]} {package[3]} {package[4] or ''}')
+
+
+def create_parser():
+    parser = argparse.ArgumentParser(description='Blabprezent CLI')
+    subparsers = parser.add_subparsers(dest='mode', help='Available modes')
+    subparsers.add_parser('bot', help='Start bot')
+    subparsers.add_parser('draw', help='Gift draw')
+    subparsers.add_parser('send-assignments', help='Send gift assignments')
+    status_parser = subparsers.add_parser('status', help='Check status')
+    status_subparsers = status_parser.add_subparsers(dest='status_type', help='Status type')
+    status_subparsers.add_parser('users', help='Check participant list')
+    status_subparsers.add_parser('gifts', help='Check gift status')
+    return parser, status_parser
+
+
+def run_action_from_arguments():
+    parser, status_parser = create_parser()
 
     args = parser.parse_args()
 
@@ -77,6 +110,15 @@ def run_action_from_arguments():
         action_draw()
     elif args.mode == 'send-assignments':
         action_send_assignments()
+    elif args.mode == 'status':
+        if args.status_type == 'users':
+            action_status_users()
+        elif args.status_type == 'gifts':
+            action_status_gifts()
+        else:
+            status_parser.print_help()
+    else:
+        parser.print_help()
 
 
 if __name__ == '__main__':

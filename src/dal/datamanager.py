@@ -17,7 +17,7 @@ def delete_user_data(username):
     _execute_sql_query(sql_query, (username,))
 
 
-def get_participants():
+def get_all_participants():
     sql_query = "SELECT user FROM Addresses"
     users_tuples = _execute_sql_query(sql_query)
     users_strings = [user_tuple[0] for user_tuple in users_tuples]
@@ -25,12 +25,32 @@ def get_participants():
     return users_strings
 
 
+def get_all_addresses():
+    sql_query = "SELECT user, address FROM Addresses"
+    return _execute_sql_query(sql_query).fetchall()
+
+
+def get_all_not_sent_packages():
+    sql_query = "SELECT sender, receiver FROM Gifts WHERE sent IS NULL"
+    return _execute_sql_query(sql_query).fetchall()
+
+
+def get_all_sent_packages():
+    sql_query = "SELECT sender, receiver, sent, url FROM Gifts WHERE sent IS NOT NULL AND received IS NULL"
+    return _execute_sql_query(sql_query).fetchall()
+
+
+def get_all_received_packages():
+    sql_query = "SELECT sender, receiver, sent, received, url FROM Gifts WHERE received IS NOT NULL"
+    return _execute_sql_query(sql_query).fetchall()
+
+
 def save_gift_assignment(sender, receiver):
     sql_query = "INSERT INTO Gifts (sender, receiver) VALUES (?, ?)"
     _execute_sql_query(sql_query, (sender, receiver))
 
 
-def get_gift_assignments():
+def get_all_gift_assignments():
     sql_query = "SELECT sender, receiver FROM Gifts"
     return _execute_sql_query(sql_query)
 

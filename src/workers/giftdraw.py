@@ -6,7 +6,7 @@ from src.dal import datamanager
 
 
 def gift_assignment_draw():
-    all_participants = datamanager.get_participants()
+    all_participants = datamanager.get_all_participants()
     participants_without_gift = list(all_participants)
 
     for sender in all_participants:

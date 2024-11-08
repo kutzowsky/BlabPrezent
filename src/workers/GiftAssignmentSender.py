@@ -24,7 +24,7 @@ class GiftAssignmentSender:
             self.sender = GiftAssignmentSenderWWW()
 
     def send_assignments(self, wait_seconds=2):
-        gift_assignments = datamanager.get_gift_assignments()
+        gift_assignments = datamanager.get_all_gift_assignments()
 
         for gift_assignment in gift_assignments:
             gift_sender = gift_assignment[0]
