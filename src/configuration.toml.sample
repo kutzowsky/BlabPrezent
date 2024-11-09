@@ -2,6 +2,8 @@
 mode = "www"    # or xmpp
 participant_list_open = true
 database_file = "blabprezent.db"
+log_file = "../bot.log"
+log_level = "INFO"      # or DEBUG, WARNING, ERROR
 
 [JabberBot]
 jid = "somejid@some.server"

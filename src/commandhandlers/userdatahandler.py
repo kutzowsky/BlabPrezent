@@ -22,7 +22,7 @@ def handle_message_content(sender, message_content):
     try:
         return handling_functions[command](sender, arguments)
     except KeyError:
-        logger.info('Got unknown command')
+        logger.warning(f'Got unknown command: {command}')
         return [(sender, strings.help_text)]
 
 
@@ -30,10 +30,10 @@ def _handle_add(sender, user_data):
     logger.info('Got add command')
 
     try:
-        logger.info('Trying save data for user: ' + sender)
+        logger.info(f'Trying save data for user: {sender}')
         datamanager.save_user_data(sender, user_data)
     except Exception as exc:
-        logger.warning('Data saving failed. Reason: ' + str(exc))
+        logger.error(f'Data saving failed. Reason: {str(exc)}')
         return [(sender, strings.error_text)]
     else:
         logger.info('User data saved')
@@ -44,7 +44,7 @@ def _handle_delete(sender, _):
     logger.info('Got delete command')
 
     try:
-        logger.info('Trying delete data for user: ' + sender)
+        logger.info(f'Trying delete data for user: {sender}')
 
         if datamanager.is_participant(sender):
             datamanager.delete_user_data(sender)
@@ -52,7 +52,7 @@ def _handle_delete(sender, _):
             logger.info(f'User {sender} is not a participant.')
             return [(sender, strings.not_a_participant)]
     except Exception as exc:
-        logger.warning('Data deletion failed. Reason: ' + str(exc))
+        logger.error(f'Data deletion failed. Reason: {str(exc)}')
         return [(sender, strings.error_text)]
     else:
         logger.info('User data deleted')

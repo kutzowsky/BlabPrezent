@@ -24,7 +24,7 @@ class MessageHandler:
         answers = None
 
         if messageparser.is_directed_private(message):
-            self.logger.info('Directed private message: ' + message)
+            self.logger.debug('Directed private message: ' + message)
 
             message_content = messageparser.get_content_from(message)
             answers = self.message_content_handler.handle_message_content(sender, message_content)

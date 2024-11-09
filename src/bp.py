@@ -11,15 +11,12 @@ from config import settings
 from dal import datamanager
 from workers import XmppBot, WebsiteParsingBot, gift_assignment_draw, GiftAssignmentSender
 
+logger = logging.getLogger()
 
 def set_logger():
-    global logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    file_handler = logging.FileHandler('../bot.log')
-    file_handler.setLevel(logging.DEBUG)
+    logger.setLevel(settings.General.log_level.upper())
+    file_handler = logging.FileHandler(settings.General.log_file)
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
@@ -29,24 +26,25 @@ def set_logger():
 
 def create_db_if_not_exist():
     if not os.path.exists(settings.General.database_file):
-        logger.info(f'Database file does not exist. Creating.')
+        logger.warning(f'Database file does not exist. Creating.')
         datamanager.create_db()
 
 
 def action_bot():
     if settings.General.mode == 'www':
+        logger.info('Starting WWW bot')
+
         bot = WebsiteParsingBot()
         bot.login(settings.WebsiteBot.login, settings.WebsiteBot.password)
         bot.try_create_latest_message_file()
         bot.start_listening()
 
-        logger.info('WWW bot started')
     elif settings.General.mode == 'xmpp':
+        logger.info('Starting XMPP bot')
+
         bot = XmppBot(settings.JabberBot.jid, settings.JabberBot.password, settings.JabberBot.blabler_bot_jid)
         bot.connect()
         bot.process()
-
-        logger.info('XMPP bot started')
 
 
 def action_draw():
@@ -102,7 +100,7 @@ def run_action_from_arguments():
 
     args = parser.parse_args()
 
-    logger.info(f'Selected mode: {args.mode}')
+    logger.debug(f'Selected mode: {args.mode}')
 
     if args.mode == 'bot':
         action_bot()

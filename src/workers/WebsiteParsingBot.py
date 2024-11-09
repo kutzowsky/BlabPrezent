@@ -24,7 +24,7 @@ class WebsiteParsingBot:
 
     def try_create_latest_message_file(self):
         if not os.path.exists(self.checkpoint_file_path):
-            logging.info(f"{self.checkpoint_file_path} does not exist. Creating.")
+            self.logger.warning(f"{self.checkpoint_file_path} does not exist. Creating.")
 
             messages = self.website_client.get_secretary_messages()
             messages_to_bot = list(filter(lambda message: not message['text'].startswith(self.username), messages))
@@ -32,7 +32,7 @@ class WebsiteParsingBot:
             pickle.dump(latest_message, open(self.checkpoint_file_path, 'wb'))
 
     def start_listening(self, sleep_seconds=60.0):
-        self.logger.info(f'Listening started. Sleep timeout set to: {sleep_seconds}s')
+        self.logger.info(f'Listening. Sleep timeout: {sleep_seconds}s')
 
         while True:
             try:
@@ -56,7 +56,7 @@ class WebsiteParsingBot:
             self.logger.info('No new messages')
             return []
 
-        self.logger.info(f'New messages: {len(messages_to_bot)}')
+        self.logger.info(f'New messages to process. Message count: {len(messages_to_bot)}')
 
         latest_message = messages_to_bot[0]
         pickle.dump(latest_message, open(self.checkpoint_file_path, "wb"))

@@ -35,15 +35,15 @@ def handle_message_content(sender, message_content):
     try:
         return handling_functions[command](sender, arguments)
     except KeyError:
-        logger.info('Got unknown command')
+        logger.warning(f'Got unknown command: {command}')
         return [(sender, strings.help_text)]
 
 
 def _handle_sent_confirmation(sender, arguments=None):
-    logger.info('Got sent confirmation')
+    logger.info(f'Got sent confirmation from: {sender}')
 
     try:
-        logger.info('Trying to save sent confirmation for user: ' + sender)
+        logger.info(f'Trying to save sent confirmation')
 
         if not datamanager.is_participant(sender):
             return [(sender, strings.not_a_participant)]
@@ -53,9 +53,9 @@ def _handle_sent_confirmation(sender, arguments=None):
             logger.debug('Confirmation has parameter')
             if _is_url(arguments):
                 tracking_url = arguments
-                logger.debug('Tracking URL detected: ' + tracking_url)
+                logger.debug(f'Tracking URL detected: {tracking_url}')
             else:
-                logger.warning('Confirmation parameter is not valid URL: ' + arguments)
+                logger.warning(f'Confirmation parameter is not valid URL: {arguments}')
 
         datamanager.save_send_confirmation(sender, datetime.datetime.now(), tracking_url)
 
@@ -63,7 +63,7 @@ def _handle_sent_confirmation(sender, arguments=None):
         logger.warning('Duplicated sent confirmation')
         return [(sender, strings.confirmation_already_exists)]
     except Exception as exc:
-        logger.warning('Sent confirmation saving failed. Reason: ' + str(exc))
+        logger.error(f'Sent confirmation saving failed. Reason: {str(exc)}')
         return [(sender, strings.error_text)]
     else:
         logger.info('Sent confirmation saved')
@@ -83,7 +83,7 @@ def _handle_received_confirmation(sender, _):
     logger.info('Got received confirmation')
 
     try:
-        logger.info('Trying to save received confirmation for user: ' + sender)
+        logger.info(f'Trying to save received confirmation for user: {sender}')
 
         if not datamanager.is_participant(sender):
             return [(sender, strings.not_a_participant)]
@@ -93,7 +93,7 @@ def _handle_received_confirmation(sender, _):
         logger.warning('Duplicated received confirmation')
         return [(sender, strings.confirmation_already_exists)]
     except Exception as exc:
-        logger.warning('Received confirmation saving failed. Reason: ' + str(exc))
+        logger.error(f'Received confirmation saving failed. Reason: {str(exc)}')
         return [(sender, strings.error_text)]
     else:
         logger.info('Received confirmation saved')
