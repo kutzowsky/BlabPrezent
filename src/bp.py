@@ -73,13 +73,13 @@ def action_status_gifts():
     packages = datamanager.get_all_sent_packages()
     print(f'W drodze: {len(packages)}')
     for package in packages:
-        print(f'{package[0]}->{package[1]: <13}{package[2]} {package[3] or ''}')
+        print(f'{package[0]}->{package[1]: <13}{package[2]} {package[3] or ""}')
     print()
 
     packages = datamanager.get_all_received_packages()
     print(f'Odebrane: {len(packages)}')
     for package in packages:
-        print(f'{package[0]}->{package[1]: <13}{package[2]} {package[3]} {package[4] or ''}')
+        print(f'{package[0]}->{package[1]: <13}{package[2]} {package[3]} {package[4] or ""}')
 
 
 def create_parser():
