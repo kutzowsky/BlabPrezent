@@ -13,6 +13,8 @@
         name:
           - git
           - python3-pip
+          - python3-full
+          - virtualenv
           - sqlite3
           - libsqlite3-dev
           - supervisor
@@ -65,7 +67,7 @@
     - name: Copy code to user home directory
       copy:
         src: '{{ tempdir }}/src/'
-        dest: '/home/{{ username }}'
+        dest: '/home/{{ username }}/src'
         remote_src: yes
         owner: '{{ username }}'
         group: '{{ username }}'
@@ -78,4 +80,5 @@
 
     - name: Install python requirements
       pip:
-        requirements: '/home/{{ username }}/requirements.txt'
+        requirements: '/home/{{ username }}/src/requirements.txt'
+        virtualenv: '/home/{{ username }}/bpenv'
