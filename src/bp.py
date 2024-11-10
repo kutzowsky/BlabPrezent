@@ -13,6 +13,14 @@ from workers import XmppBot, WebsiteParsingBot, gift_assignment_draw, GiftAssign
 
 logger = logging.getLogger()
 
+
+def exit_if_config_not_exist():
+    conf_file = 'configuration.toml'
+    if not os.path.exists('configuration.toml'):
+        logger.error(f'{conf_file} does not exist. Provide valid configuration file and try again.')
+        sys.exit(1)
+
+
 def set_logger():
     logger.setLevel(settings.General.log_level.upper())
     file_handler = logging.FileHandler(settings.General.log_file)
@@ -120,6 +128,7 @@ def run_action_from_arguments():
 
 
 if __name__ == '__main__':
+    exit_if_config_not_exist()
     set_logger()
     create_db_if_not_exist()
     run_action_from_arguments()
