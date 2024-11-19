@@ -3,6 +3,8 @@ name: Deploy user guide Jekyll page to GitHub Pages
 on:
   push:
     branches: ["master"]
+    paths:
+    - 'guide/**'
 
   workflow_dispatch:
 
@@ -26,7 +28,7 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./guide
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

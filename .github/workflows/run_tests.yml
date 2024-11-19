@@ -1,6 +1,9 @@
 name: Run unit tests and get coverage report
 
-on: [push]
+on:
+  push:
+    paths:
+    - 'src/**'
 
 jobs:
   build:

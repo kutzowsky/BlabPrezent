@@ -1,0 +1,12 @@
+title: Instrukcja uczestnika
+email: kucyk010@gmail.com
+description: ""
+baseurl: "/BlabPrezent"
+url: ""
+
+# Build settings
+markdown: kramdown
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme
