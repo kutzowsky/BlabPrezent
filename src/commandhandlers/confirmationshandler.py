@@ -17,6 +17,7 @@ def handle_message_content(sender, message_content):
     handling_functions = {
         'dodaj': _handle_add_or_delete,
         'usuń': _handle_add_or_delete,
+        'usun': _handle_add_or_delete,
         'wyslano': _handle_sent_confirmation,
         'wysłano': _handle_sent_confirmation,
         'nadano': _handle_sent_confirmation,

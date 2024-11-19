@@ -63,7 +63,7 @@ def test_when_there_is_error_with_saving_user_data_should_return_error_text(mock
     'Dodaj',
     'dodaj:'
 ])
-def test_when_command_synonym_was_provided_should_also_recognize_it(message, mocker):
+def test_when_add_command_synonym_was_provided_should_also_recognize_it(message, mocker):
     user = 'someuser'
     save_user_data_mock = mocker.patch('src.dal.datamanager.save_user_data')
 
@@ -123,3 +123,22 @@ def test_when_unknown_user_sends_delete_command_should_not_try_to_delete_data_an
 
     assert answer == expected_answer
     delete_user_data_mock.assert_not_called()
+
+
+@pytest.mark.parametrize('message', [
+    'usuń',
+    'usun',
+    'USUŃ',
+    'USUN',
+    'Usuń',
+    'usun:'
+])
+def test_when_delete_command_synonym_was_provided_should_also_recognize_it(message, mocker):
+    user = 'someuser'
+    delete_user_data_mock = mocker.patch('src.dal.datamanager.delete_user_data')
+    is_participant_mock = mocker.patch('src.dal.datamanager.is_participant')
+    is_participant_mock.return_value = True
+
+    userdatahandler.handle_message_content(user, message)
+
+    delete_user_data_mock.assert_called_once()

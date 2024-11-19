@@ -66,6 +66,23 @@ def test_when_message_has_delete_command_should_not_try_to_delete_user(mocker):
 
 
 @pytest.mark.parametrize('message', [
+    'usuń',
+    'usun',
+    'USUŃ',
+    'USUN',
+    'Usuń',
+    'usun:'
+])
+def test_when_delete_command_synonym_was_provided_should_also_recognize_it(message, mocker):
+    user = 'someuser'
+    delete_user_data_mock = mocker.patch('src.dal.datamanager.delete_user_data')
+
+    confirmationshandler.handle_message_content(user, message)
+
+    delete_user_data_mock.assert_not_called()
+
+
+@pytest.mark.parametrize('message', [
     'wyslano',
     'wysłano',
 ])

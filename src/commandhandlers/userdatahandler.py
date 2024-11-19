@@ -13,7 +13,8 @@ logger = logging.getLogger()
 def handle_message_content(sender, message_content):
     handling_functions = {
         'dodaj': _handle_add,
-        'usuń': _handle_delete
+        'usuń': _handle_delete,
+        'usun': _handle_delete
     }
 
     command = messageparser.get_command_from(message_content).lower()
