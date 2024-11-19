@@ -32,4 +32,4 @@ Uruchomić `bp.py` z odpowiednim parametrem, np `python bp.py bot`
 * **Język:** Python,
 * **Główne zależności:** [SQLite](https://www.sqlite.org), [Dynaconf](https://www.dynaconf.com), [slixmpp](https://slixmpp.readthedocs.io/en/latest/), [mechanicalsoup](https://mechanicalsoup.readthedocs.io/en/stable/),
 * **Testy**: [pytest](https://docs.pytest.org/en/stable/)
-* **Więcej** w [wiki](https://github.com/kutzowsky/BlabPrezent/wiki).
+* **Jeszcze więcej** w [wiki](https://github.com/kutzowsky/BlabPrezent/wiki) i [instrukcji użytkownika](https://kutzowsky.github.io/BlabPrezent/)
