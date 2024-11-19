@@ -109,9 +109,13 @@ O wysłaniu prezentu poinformuj bota wiadomością:
 
 `>>blabprezent: wyslano`
 
+<!--
+
 **Nowość**: Jeśli chcesz przekazać adresatowi link do śledzenia przesyłki, możesz go dodać po "wyslano":
 
 `>>blabprezent: wyslano https://pony-express.com/tracking/123656335423`
+
+-->
 
 ### Potwierdzenie odebrania
 
