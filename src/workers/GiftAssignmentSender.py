@@ -55,7 +55,7 @@ class GiftAssignmentSenderXMPP(ClientXMPP):
 class GiftAssignmentSenderWWW:
     def __init__(self, website_client=BlabWebsiteClient()):
         self.website_client = website_client
-        self.website_client.login(settings.WebsiteBot.website_login, settings.WebsiteBot.website_password)
+        self.website_client.login(settings.WebsiteBot.login, settings.WebsiteBot.password)
 
     def send_assignment(self, text):
         self.website_client.send_message(text)
