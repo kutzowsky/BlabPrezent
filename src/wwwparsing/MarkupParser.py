@@ -28,7 +28,13 @@ class MarkupParser:
         if not message_text_element:
             return ''
 
-        return message_text_element.text.strip()
+        message_link_elements = message_text_element.find_all('a', href=lambda href: href and ('r.blabler.pl' in href))
+        text = message_text_element.text.strip()
+
+        for link_element in message_link_elements:
+            text = text.replace(f'[{link_element.text}]', link_element['title'])
+
+        return text
 
     @staticmethod
     def get_message_timestamp(html_element):
