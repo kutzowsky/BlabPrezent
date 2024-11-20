@@ -123,7 +123,9 @@ Gdy po otrzymaniu prezentu użyj komendy "otrzymano":
 
 `>>blabprezent: otrzymano`
 
-Uwaga: Potwierdzenia skutkują również powiadomieniem drugiej strony. Na przykład po „wysłano” adresat dostanie informację, że prezent ruszył w drogę.
+### Potwierdzenia ogólnie
+
+Potwierdzenia skutkują również powiadomieniem drugiej strony. Na przykład po „wysłano” adresat dostanie informację, że prezent ruszył w drogę.
 
 Jeśli chcesz, to możesz pochwalić się prezentem na tagu [blabprezent](https://blabler.pl/tag/blabprezent.html).
 
@@ -134,6 +136,5 @@ Obserwuj tag [blabprezent](https://blabler.pl/tag/blabprezent.html) by być na b
 Za całą akcję odpowiada [kouma](https://blabler.pl/dash/kouma.html).
 (Ale pamiętajcie, Was jest trochę, on tylko jeden, a doba ma tylko 24 godziny.)
 
-Raz na jakiś czas może zdarzyć się że jedna z przesyłek gdzieś zabłądzi albo się opóźni. 
+Raz na jakiś czas może zdarzyć się że jedna z przesyłek gdzieś zabłądzi albo się opóźni.
 Wszystkie nietypowe sytuacje zawsze da się wyjaśnić na spokojnie. O problemach informuj [kouma](https://blabler.pl/dash/kouma.html).
-
