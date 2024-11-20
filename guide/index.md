@@ -11,8 +11,8 @@ którzy wcześniej się zapisali, a nie automatycznie cała klasa.
 
 ## Super, też chcę!
 
-Przeczytaj najpierw całą instrukcję, przeanalizuj spokojnie zasady i zastanów się, czy na pewno chcesz wziąć udział. 
-**Bycie na liście w dniu jej zamknięcia zobowiązuje Cię do akceptacji zasad zabawy i kupna prezentu wylosowanej osobie.** 
+Przeczytaj najpierw całą instrukcję, przeanalizuj spokojnie zasady i zastanów się, czy na pewno chcesz wziąć udział.
+**Bycie na liście w dniu jej zamknięcia zobowiązuje Cię do akceptacji zasad zabawy i kupna prezentu wylosowanej osobie.**
 
 ## Co na prezent?
 
@@ -21,10 +21,10 @@ BlabPrezent to **książka** (papierowa, ebook lub audiobook).
 Zasady ogólne:
 
 * **książka papierowa** może być nowa lub używana (w dobrym stanie),
-* **ebook** powinien być kupiony z wykorzystaniem opcji „zrób prezent” by obdarowana osoba dostała unikatowy link do jej pobrania 
+* **ebook** powinien być kupiony z wykorzystaniem opcji „zrób prezent” by obdarowana osoba dostała unikatowy link do jej pobrania
 w co najmniej dwóch formatach (mobi i epub);<br>
 książki w wersji cyfrowej są często zabezpieczone cyfrowym znakiem wodnym i warto to sprawdzić przed zakupem,
-* **audiobook** również powinien być kupiony używając opcji „zrób prezent” lub innej analogicznej, by obdarowana osoba mogła otrzymać swoją 
+* **audiobook** również powinien być kupiony używając opcji „zrób prezent” lub innej analogicznej, by obdarowana osoba mogła otrzymać swoją
 legalną kopię.
 * sugerowana cena prezentu to **70 zł** (wraz z kosztami wysyłki).
 
@@ -115,7 +115,7 @@ O wysłaniu prezentu poinformuj bota wiadomością:
 
 ### Potwierdzenie odebrania
 
-Gdy po otrzymaniu prezentu użyj komendy "otrzymano":
+Po otrzymaniu prezentu użyj komendy "otrzymano":
 
 `>>blabprezent: otrzymano`
 
