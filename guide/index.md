@@ -71,15 +71,26 @@ lub:
 
 albo:
 
-`>>blabprezent: dodaj Irena Mustangowska Aleja Przyjaźni 8/3 Kraków 31-901 (wszystkie)`
+`>>blabprezent: dodaj Irena Mustangowska Aleja Przyjaźni 8/3 Kraków 31-901 eireen.m@gmail.com (wszystkie)`
 
-Możesz dopisać swój numer telefonu. Przyda się, gdy książka będzie wysłana kurierem. 
-Zalecamy wysyłkę w sposób, który pozwala na śledzenie paczki i podanie możliwie wielu informacji, by szczęśliwie dotarła.
+Możesz dopisać swój numer telefonu. Przyda się, gdy książka będzie wysłana kurierem.
+
+Dozwolone jest także odebranie prezentu w automacie paczkowym, a nie w domu. Warto wtedy upewnić się, czego wymaga operator danego automatu
+i podać wszystkie niezbędne dane. Na przykład, oprócz imienia, nazwiska oraz symbolu automatu, może być wymagany też numer telefonu
+i adres email nawet, gdy chcemy tylko książkę papierową.
+
+Ogólnie zasada jest taka, że podajemy tyle informacji żeby nadawca nie miał wątpliwości jaką formę prezentu sobie życzymy
+i nie było problemów z wysyłką.
 
 **Bot powinien odpowiedzieć, że poprawnie zapisał dane w bazie – tylko wtedy możesz mieć pewność, że uczestniczysz w zabawie.**
 
-Bot odpowiada po pewnej chwili (do kilku minut). Jeśli po tym czasie (i odświeżeniu strony) nie ma żadnej odpowiedzi albo jest taka, 
+Bot odpowiada po pewnej chwili (do kilku minut). Jeśli po tym czasie (i odświeżeniu strony) nie ma żadnej odpowiedzi albo jest taka,
 której nie rozumiesz, skontaktuj się z [kouma](https://blabler.pl/dash/kouma.html).
+
+### Modyfikacja danych
+
+Swoje dane zgłoszeniowe można modyfikować póki lista uczestników jest otwarta. W tym celu, należy ponownie użyć komendy "dodaj" z pełnymi,
+poprawionymi danymi. **Stary wpis zostanie w całości zastąpiony nowym, a bot powinien ponownie wysłać potwierdzenie.**
 
 ### Usunięcie z listy
 
@@ -92,12 +103,14 @@ Pamiętaj, że możesz zrobić to tylko i wyłącznie przed terminem zamknięcia
 
 ## Losowanie i wysyłka
 
-Po zakończeniu zbierania danych odbędzie się losowanie, a następnie każdy uczestnik/uczestniczka zostanie powiadomiony 
-(także za pośrednictwem bota) o tym kogo obdarowuje. W tym miejscu następuje część właściwa, czyli wybór i wysłanie prezentu do osoby, 
+Po zakończeniu zbierania danych odbędzie się losowanie, a następnie każdy uczestnik/uczestniczka zostanie powiadomiony
+(także za pośrednictwem bota) o tym kogo obdarowuje. W tym miejscu następuje część właściwa, czyli wybór i wysłanie prezentu do osoby,
 która przypadła nam w udziale oraz oczekiwanie na swój prezent.
 
-W wyborze prezentu może pomóc tag [biblioteczka](https://blabler.pl/tag/biblioteczka.html), na którym można opisać swoje gusta 
+W wyborze prezentu może pomóc tag [biblioteczka](https://blabler.pl/tag/biblioteczka.html), na którym można opisać swoje gusta
 czytelnicze oraz podejrzeć co lubi osoba, którą wylosowaliśmy.
+
+Zalecamy wysyłkę w sposób, który pozwala na śledzenie paczki (jeśli możliwy jest wybór kilku opcji).
 
 ## Potwierdzenia wysyłki i odbioru prezentów
 
@@ -122,6 +135,8 @@ Po otrzymaniu prezentu użyj komendy "otrzymano":
 ### Potwierdzenia ogólnie
 
 Potwierdzenia skutkują również powiadomieniem drugiej strony. Na przykład po „wysłano” adresat dostanie informację, że prezent ruszył w drogę.
+
+Prezenty w formie elektronicznej również potwierdzamy.
 
 Jeśli chcesz, to możesz pochwalić się prezentem na tagu [blabprezent](https://blabler.pl/tag/blabprezent.html).
 
