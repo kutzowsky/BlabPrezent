@@ -44,8 +44,6 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0)
-    ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86_64-darwin)
     forwardable-extended (2.6.0)
     gemoji (4.1.0)
     github-pages (232)
@@ -267,14 +265,11 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
-    uri (1.0.1)
+    uri (1.0.3)
     wdm (0.1.1)
     webrick (1.9.0)
 
 PLATFORMS
-  arm64-darwin
-  ruby
-  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
