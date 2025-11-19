@@ -34,10 +34,10 @@ Do prezentu możesz dodać kartkę z dedykacją i życzeniami. Możesz też się
 
 | Co?                          | Kiedy?                       |
 | ---------------------------- | ---------------------------- |
-| Rozpoczęcie i zapisy         | 20.11.2024                   |
-| Zamknięcie listy uczestników | 27.11.2024 (o północy)       |
-| Losowanie                    | 28.11.2024                   |
-| Ostateczny termin wysyłki    | 15.12.2024                   |
+| Rozpoczęcie i zapisy         | 24.11.2025                   |
+| Zamknięcie listy uczestników | 29.11.2025 (o północy)       |
+| Losowanie                    | 30.11.2025                   |
+| Ostateczny termin wysyłki    | 14.12.2025                   |
 | Zakończenie                  | Gdy dotrą wszystkie prezenty |
 
 ## Polecenia bota
