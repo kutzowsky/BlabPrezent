@@ -94,11 +94,11 @@ poprawionymi danymi. **Stary wpis zostanie w całości zastąpiony nowym, a bot 
 
 ### Usunięcie z listy
 
-**Nowość**: jeśli jednak zmienisz zdanie, to możesz usunąć się z listy uczestników poleceniem "usun".
+Jeśli zmienisz zdanie, możesz usunąć się z listy uczestników poleceniem "usun".
 
 `>>blabprezent: usun`
 
-**Bot powinien wysłac wiadomość z potwierdzeniem usunięcia - tylko wtedy masz pewność, że jednak nie będziesz uczestniczyć w zabawie.**
+**Bot powinien wysłac wiadomość z potwierdzeniem usunięcia - tylko wtedy masz pewność, że nie będziesz uczestniczyć w zabawie.**
 Pamiętaj, że możesz zrobić to tylko i wyłącznie przed terminem zamknięcia listy uczestników podanym w sekcji [Terminarz](#terminarz).
 
 ## Losowanie i wysyłka
@@ -122,7 +122,7 @@ O wysłaniu prezentu poinformuj bota wiadomością:
 
 `>>blabprezent: wyslano`
 
-**Nowość**: Jeśli chcesz przekazać adresatowi link do śledzenia przesyłki, możesz go dodać po "wyslano":
+Jeśli chcesz przekazać adresatowi link do śledzenia przesyłki, możesz go dodać po "wyslano":
 
 `>>blabprezent: wyslano https://pony-express.com/tracking/123656335423`
 
